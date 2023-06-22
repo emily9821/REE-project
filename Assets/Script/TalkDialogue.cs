@@ -23,4 +23,9 @@ public class TalkDialogue : MonoBehaviour
             theDM.ShowDialogue(dialogue);
         }
     }
+
+    void Update()
+    {
+       
+    }
 }

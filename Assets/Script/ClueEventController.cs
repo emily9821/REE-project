@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<< Updated upstream
-// 실질적으로 필요한 기능 구현
 public class ClueEventController : MonoBehaviour
 {
     public SpriteRenderer view;
@@ -16,29 +14,19 @@ public class ClueEventController : MonoBehaviour
 
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(ImageChanger());
+            //view.enabled=false;
+        }
     }
 
     IEnumerator ImageChanger()
     {
         for (int i = 0; i < images.Count; i++)
         {
-            view.sprite = images[i];
-            yield return new WaitForSeconds(1);
+           view.sprite = images[i];
+           yield return new WaitForSeconds(1);
         }
-=======
-public class ClueEventController : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
->>>>>>> Stashed changes
     }
 }
