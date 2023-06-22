@@ -27,6 +27,8 @@ public class AboutTransform : MonoBehaviour
         //scaler = transform.parent.GetComponent<CanvasScaler>();
         //scaler = transform.GetComponentInParent<CanvasScaler>();
         //scaler = transform.GetComponentInChildren<CanvasScaler>();
+
+        FadeManager.StartFadeIn();
     }
 
     // Update is called once per frame

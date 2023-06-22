@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 // 실질적으로 필요한 기능 구현
 public class ClueEventController : MonoBehaviour
 {
@@ -16,7 +16,7 @@ public class ClueEventController : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     IEnumerator ImageChanger()
@@ -26,19 +26,5 @@ public class ClueEventController : MonoBehaviour
             view.sprite = images[i];
             yield return new WaitForSeconds(1);
         }
-=======
-public class ClueEventController : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
->>>>>>> Stashed changes
     }
 }

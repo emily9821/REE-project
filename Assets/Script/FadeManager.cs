@@ -1,14 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FadeManager : MonoBehaviour
 {
-    public SpriteRenderer white;
-    public SpriteRenderer black;
+    public Image screen;
     private Color color;
 
-    private WaitForSeconds waitTime = new WaitForSeconds(0.01f);
+    private static FadeManager I 
+    {
+        get
+        {
+            if (_fadeManager == null)
+            {
+                var fadeManager = FindObjectOfType<FadeManager>();
+                _fadeManager = fadeManager == null ? Instantiate(Resources.Load<FadeManager>("Fade Manager")) : fadeManager;
+            }
+            return _fadeManager;
+        }
+        set { _fadeManager = value; }
+    }
+    private readonly WaitForSeconds waitTime = new WaitForSeconds(0.01f);
+    private static FadeManager _fadeManager;
+
+    public static void StartFadeOut()
+    {
+        I.FadeOut();
+    }
+
+    public static void StartFadeIn()
+    {
+        I.FadeIn();
+    }
 
     public void FadeOut(float _speed =0.02f)
     {
@@ -18,13 +42,13 @@ public class FadeManager : MonoBehaviour
     }
     IEnumerator FadeOutCoroutine(float _speed)
     {
+        color.a = 0f;
+        //color = screen.color;
 
-        color = black.color;
-
-        while(color.a <1f)
+        while(color.a < 1f)
         {
             color.a += _speed;
-            black.color = color;
+            screen.color = color;
             yield return waitTime;
         }
     }
@@ -33,17 +57,17 @@ public class FadeManager : MonoBehaviour
     {
         StopAllCoroutines();
         StartCoroutine(FadeInCoroutine(_speed));
-
     }
+
     IEnumerator FadeInCoroutine(float _speed)
     {
+        color.a = 1f;
+        //color = screen.color;
 
-        color = black.color;
-
-        while(color.a <1f)
+        while(color.a > 0f)
         {
             color.a -= _speed;
-            black.color = color;
+            screen.color = color;
             yield return waitTime;
         }
     }
@@ -56,13 +80,13 @@ public class FadeManager : MonoBehaviour
     }
     IEnumerator FlashOutCoroutine(float _speed)
     {
-
-        color = white.color;
+        color.a = 0f;
+        color = screen.color;
 
         while(color.a <1f)
         {
             color.a += _speed;
-            white.color = color;
+            screen.color = color;
             yield return waitTime;
         }
     }
@@ -76,12 +100,12 @@ public class FadeManager : MonoBehaviour
     IEnumerator FlashInCoroutine(float _speed)
     {
 
-        color = white.color;
+        color = screen.color;
 
         while(color.a >0f)
         {
             color.a -= _speed;
-            white.color = color;
+            screen.color = color;
             yield return waitTime;
         }
     }
