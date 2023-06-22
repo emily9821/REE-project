@@ -18,6 +18,8 @@ public class PlayerManager : MovingCharacter
     private bool canMove = true; //코루틴 반복 조건 변수
     public bool notMove=false;
 
+    private GameObject target;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -36,6 +38,9 @@ public class PlayerManager : MovingCharacter
     {
         boxCollider =GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+        target = Resources.Load<GameObject>("Ray");
+        target = Instantiate(target);
+        target.transform.parent=GameObject.Find("Player").transform;
     }
 
     IEnumerator MoveCoroutine()
@@ -68,13 +73,15 @@ public class PlayerManager : MovingCharacter
             Vector2 start =  transform.position; // a지점, 캐릭터의 현재 위치 값
             Vector2 end = start + new Vector2(vector.x * speed * walkCount, vector.y * speed * walkCount);    //b지점, 캐릭터가 이동하고자하는 위치 값
         
-            boxCollider.enabled = false;
+            //boxCollider.enabled = false;
             hit=Physics2D.Linecast(start,end, layerMask);
-            boxCollider.enabled = true;
+            //boxCollider.enabled = true;
             
             if(hit.transform != null)
+            {
+                Debug.Log(hit.transform.name);
                 break;
-
+            }
             //상태 전이
             animator.SetBool("Walking",true);
 
@@ -108,7 +115,15 @@ public class PlayerManager : MovingCharacter
 
     // Update is called once per frame
     void Update() //매 프레임마다 함수를 실행
-    {
+    {        
+        //Debug.DrawRay(this.transform.position, Vector3.forward*50, Color.red);
+        //RaycastHit2D hit= Physics2D.Raycast(this.transform.position, this.transform.forward, 30.0f,layerMask);
+        //Physics.Raycast(this.transform.position, this.transform.forward,out hit, 30.0f)
+        ///if(hit.collider != null)
+        //{
+        //    Debug.Log(hit.transform.name);
+        //}
+
         if (canMove && !notMove) //코루틴 반복 조건
         {
             
@@ -119,6 +134,5 @@ public class PlayerManager : MovingCharacter
                 
             }
         }
-        
     }
 }

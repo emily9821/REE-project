@@ -132,7 +132,3 @@ MonoBehaviour:
   view: {fileID: 601767647580759589}
   images:
   - {fileID: 50458993, guid: 7076e4f94fab1934fa6e6e469b15ca86, type: 3}
-  - {fileID: 21300000, guid: 1adf1f6c602114d42b62a6a7d371f0de, type: 3}
-  - {fileID: 945365607, guid: aab6202c07686a14096e761322a2259d, type: 3}
-  - {fileID: -1242714606, guid: a7d1919ca25b3be49af438b7b957df97, type: 3}
-  - {fileID: 1572787176, guid: 3f498fa0103cea94f82409ea7c369620, type: 3}
