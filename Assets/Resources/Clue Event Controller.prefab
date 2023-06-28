@@ -130,5 +130,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   view: {fileID: 601767647580759589}
-  images:
+  room1Images:
+  - {fileID: 21300000, guid: 9181693e5c56967438974eddeb0a9859, type: 3}
+  room2Images:
+  - {fileID: 21300000, guid: 897351ac983eae549b35764a23f2856d, type: 3}
+  verandaImages:
   - {fileID: 50458993, guid: 7076e4f94fab1934fa6e6e469b15ca86, type: 3}
+  livingroomImages: []
+  workspaceImages:
+  - {fileID: 21300000, guid: 1adf1f6c602114d42b62a6a7d371f0de, type: 3}
+  labImages: []

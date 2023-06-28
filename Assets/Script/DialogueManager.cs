@@ -34,6 +34,7 @@ public class DialogueManager : MonoBehaviour
     public bool talking = false;
 
     private OrderManager theOrder;
+    //private PlayerManager thePlayer;
 
 
     // Start is called before the first frame update
@@ -44,17 +45,22 @@ public class DialogueManager : MonoBehaviour
         listSentences = new List<string>();
         dialoguePanel.SetActive(talking);
         theOrder= FindObjectOfType<OrderManager>();
+        //dialogue=FindObjectOfType<TalkDialogue>();
+        //thePlayer=FindObjectOfType<PlayerManager>();
     }
 
     public void ShowDialogue(Dialogue dialogue)
     {
+        //string[] dialogue=(string[])sentences.Clone();
         talking=true;
         theOrder.NotMove();
         for(int i = 0; i< dialogue.sentences.Length; i++)
         {
             listSentences.Add(dialogue.sentences[i]);
+            Debug.Log(listSentences[i]);
         }
         dialoguePanel.SetActive(talking);
+        Debug.Log("hit");
         StartCoroutine(StartDialogueCoroutine());
     }
 
@@ -70,6 +76,7 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator StartDialogueCoroutine()
     {
+        Debug.Log(count);
         yield return new WaitForSeconds(0.01f);
         for(int i=0; i<listSentences[count].Length ; i++)
         {
@@ -88,7 +95,7 @@ public class DialogueManager : MonoBehaviour
             {
                 count++;
                 text.text= "";
-                if(count == listSentences.Count)
+                if(count== listSentences.Count)
                 {
                     StopAllCoroutines();
                     ExitDialogue();

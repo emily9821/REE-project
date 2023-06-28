@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class TalkDialogue : MonoBehaviour
 {
     [SerializeField]
     public Dialogue dialogue;
+
+    //[TextArea(1,2)]   
+   // public string[] sentences;
 
     private DialogueManager theDM;
 
@@ -26,6 +30,5 @@ public class TalkDialogue : MonoBehaviour
 
     void Update()
     {
-       
     }
 }

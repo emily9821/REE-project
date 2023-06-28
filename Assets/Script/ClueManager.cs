@@ -4,79 +4,137 @@ using UnityEngine;
 
 public class ClueManager : MonoBehaviour
 {
-    public GameObject scene;
-    public GameObject target;
+    
+    public Sprite target;
+    public SpriteRenderer view;
+    public ObjData objData;
     
     public RaycastHit2D hit;
     LayerMask layerMask;
+    bool isclue=true;
 
-    bool clue=false;
-    //private PlayerManager thePM;
+    //private PlayerManager thePlayer;
     private OrderManager theOrder;
+    private DialogueManager theDM;
+    private TalkDialogue talk;
+    private ObjectImage theclue;
 
     void Start()
     {
-        //thePM=FindObjectOfType<PlayerManager>();
-        theOrder= FindObjectOfType<OrderManager>();
-
-        layerMask = LayerMask.GetMask("NoPassing");
-        hit= Physics2D.Raycast(this.transform.position, this.transform.forward, 30.0f,layerMask);
-        target = Resources.Load<GameObject>("Clue Event Controller");
-        if(hit.collider != null)
-        {
-            if(hit.transform.name == "Player" )
-            {
-                showimage();
-            }
-            else
-            {
-            Debug.Log(hit.transform.gameObject);
-            }
-        }
-        Generate();
-
+      //theclue=Resources.Load<GameObject>("ObjectImage");
+      theOrder= FindObjectOfType<OrderManager>();
+      theDM= FindObjectOfType<DialogueManager>();
+      talk= FindObjectOfType<TalkDialogue>();
+      theclue=FindObjectOfType<ObjectImage>();
     }
 
-    /*private void OnTriggerEnter2D(Collider2D collision)
+    public void Action(GameObject scanObj)
     {
-        if(collision.gameObject.name=="Player")
+        if(isclue)
         {
-            showimage();
+            isclue=false;
+            //return !isclue;
         }
         else
         {
-            Debug.Log(collision.gameObject.name);
+            isclue=true;
+            objData=scanObj.GetComponent<ObjData>();
+            showimage(objData.id, scanObj);
+            //return isclue;
         }
-    }*/
-
-    public void showimage()
-    {
-        theOrder.NotMove();
-        clue=true;
-        target = Resources.Load<GameObject>("Clue Event Controller");
-        Transform p = GameObject.Find("Player").transform;
-        target = Instantiate(target);
-        target.transform.SetParent (p,false);
-        target.name = "Clue Event Controller";
-        
-        //Instantiate(scene, Vector3.zero, Quaternion.identity);
-        Debug.Log("clue event controller");
     }
 
-    // Update is called once per frame
+    public void showimage(int id,GameObject targetObject)
+    {
+        target=theclue.getImage(id);
+    
+        if(target == null)
+        {
+            isclue = false;
+            return;
+        }
+        else
+        {
+            theOrder.NotMove();
+            Transform p = GameObject.Find("Player").transform;
+            targetObject.transform.SetParent (p,false);
+            targetObject.name = "Clue Event Controller";
+            view.sprite=target;
+            Debug.Log("clue event controller");
+        }
+        
+        isclue=true;
+        /*
+        if(message != null)
+        {
+            talk.dialogue.sentences=(string[])message.Clone();
+            theDM.ShowDialogue(talk.dialogue);
+        }
+        
+        else
+        {
+            Debug.Log("noMessage");
+
+            theOrder.Move();
+        }
+        */
+    }
+
     void Update()
     {
-        if(clue)
+
+    }
+
+   /* void Start()
+    {
+        thePM=FindObjectOfType<PlayerManager>();
+        theOrder= FindObjectOfType<OrderManager>();
+        scenename roomname;
+
+        layerMask = LayerMask.GetMask("NoPassing");
+        target = Resources.Load<GameObject>("Clue Event Controller");
+        target = Instantiate(target);
+        
+    }
+*/
+
+    
+
+    // Update is called once per frame
+    /*void Update()
+    {
+        roomnameValue=thePM.currentMapName;
+        switch(roomnameValue)
         {
-           /* if(Input.GetKeyDown(KeyCode.Z))
-            {
-            
-            Transform p = GameObject.Find("Player").transform;
-            target = Instantiate(target);
-            target.transform.SetParent (p,false);
-            target.name = "Clue Event Controller";
-            }*/
-            
+            case "room1":
+                //images=target.room1Images;
+                break;
+            case "room2":
+                //images=target.room2Images;
+                break;
+            case "veranda":
+                //images=target.verandaImages;
+                if(thePM.playobject=="wall_left" & Input.GetKeyDown(KeyCode.Space))
+                {
+                    showimage();
+                }
+                break;
+            case "livingroom":
+                //images=target.livingroomImages;
+                break;
+            case "workspace":
+                //images=target.workspaceImages;
+                break;
+            case "lab":
+                //images=target.labImages;
+                break;
+            default:
+                break;
+
+        }
+
+        if(clue)
+        {   
             if(Input.GetKeyDown(KeyCode.Space))
             {
                 Destroy(target);
@@ -85,19 +143,6 @@ public class ClueManager : MonoBehaviour
             }
         }
     }
+    */
 
-    private void Generate()
-    {
-        Instantiate(scene, Vector3.zero, Quaternion.identity);
-    }
-
-    /*private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.name == "Player")
-        {
-            Instantiate(scene, Vector3.zero, Quaternion.identity);
-            Debug.Log("clue event controller");
-        }
-        
-    }*/
 }

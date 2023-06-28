@@ -5,7 +5,7 @@ using UnityEngine;
 public class Event : MonoBehaviour
 {
 
-    public Dialogue dialogue;
+    /*ublic Dialogue dialogue;
 
     private DialogueManager theDM;
     private OrderManager theOrder;
@@ -47,4 +47,5 @@ public class Event : MonoBehaviour
     {
         
     }
+    */
 }
