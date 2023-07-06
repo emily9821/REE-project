@@ -18,6 +18,11 @@ public abstract class SoundManager<T, TEnum>: Singleton<T> where T : MonoBehavio
     protected void Play(List<SoundClip<TEnum>> clips, TEnum m)
     {
         var clip = clips.Find(x => x.sound.Equals(m)).clip;
+        if (clip == null)
+        {
+            Debug.LogError("Clip not found.");
+            return;
+        }
         audioSource.clip = clip;
         audioSource.Play();
     }
