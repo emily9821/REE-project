@@ -14,7 +14,8 @@ public class OrderManager : MonoBehaviour
     
     void Start()
     {
-        thePlayer = FindObjectOfType<PlayerManager>();
+        thePlayer = FindObjectOfType<PlayerManager>();  //하이라키 오브젝트 검색 / 하이라키 없으면 null
+        // update에는 x , 매번 검색
     }
 
     public void NotMove()
