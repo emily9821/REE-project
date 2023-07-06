@@ -92,40 +92,40 @@ public class PlayerManager : MovingCharacter
         //위치 결과로 애니메이션
         //boxCollider.enabled=true;
 
-        if(Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-        applyRunSpeed = runSpeed;
-        applyRunFlag = true;
+            applyRunSpeed = runSpeed;
+            applyRunFlag = true;
         }
         else
         {
-            applyRunSpeed=0;
+            applyRunSpeed = 0;
             applyRunFlag = false;
         }
 
-        while(currentWalkCount < walkCount) 
-        {
-            //전체 이동하는 조건들
-            //x축
-            if(vector.x !=0)
-            {
-                transform.Translate(vector.x*(speed+applyRunSpeed),0,0);
-            }
-            //y축
-            else if(vector.y !=0)
-            {
-                transform.Translate(0,vector.y*(speed+applyRunSpeed),0);
-            }                
-            if(applyRunFlag)
-            {
-                currentWalkCount ++; //shift 키 두번 증가
-            }
-            currentWalkCount ++; // 탈출하기 위한 조건 덧셈
-            yield return new WaitForSeconds(0.01f); // 2.4픽셀씩 움직이는 과정 보여주기 위함
-        }
-            
-        currentWalkCount = 0 ; //초기화  
-        animator.SetBool("Walking",false); //walking 상태 원상복귀 -> Standing
-        canMove=true; //방향키 처리 원상복귀
+        //while (currentWalkCount < walkCount)
+        //{
+        //    //전체 이동하는 조건들
+        //    //x축
+        //    if (vector.x != 0)
+        //    {
+        //        transform.Translate(vector.x * (speed + applyRunSpeed), 0, 0);
+        //    }
+        //    //y축
+        //    else if (vector.y != 0)
+        //    {
+        //        transform.Translate(0, vector.y * (speed + applyRunSpeed), 0);
+        //    }
+        //    if (applyRunFlag)
+        //    {
+        //        currentWalkCount++; //shift 키 두번 증가
+        //    }
+        //    currentWalkCount++; // 탈출하기 위한 조건 덧셈
+        //    yield return new WaitForSeconds(0.01f); // 2.4픽셀씩 움직이는 과정 보여주기 위함
+        //}
 
+        currentWalkCount = 0; //초기화  
+        animator.SetBool("Walking", false); //walking 상태 원상복귀 -> Standing
+        canMove = true; //방향키 처리 원상복귀
+    }
 }
