@@ -8,7 +8,8 @@ public class ClueManager : MonoBehaviour
     public Sprite target;
     public SpriteRenderer view;
     public ObjData objData;
-    
+    public GameObject scanObj;
+
     public RaycastHit2D hit;
     LayerMask layerMask;
     bool isclue=true;
@@ -33,14 +34,12 @@ public class ClueManager : MonoBehaviour
         if(isclue)
         {
             isclue=false;
-            //return !isclue;
         }
         else
         {
             isclue=true;
             objData=scanObj.GetComponent<ObjData>();
             showimage(objData.id, scanObj);
-            //return isclue;
         }
     }
 

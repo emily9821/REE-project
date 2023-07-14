@@ -6,7 +6,7 @@ public class PlayerManager : MovingCharacter
 {
     static public PlayerManager instance;
 
-    public string currentMapName;
+    public string currentMapName; 
 
     //public ClueManager theClue;
 
@@ -15,28 +15,24 @@ public class PlayerManager : MovingCharacter
     private float applyRunSpeed;
     //shift 키 자연스러운 이동
     private bool applyRunFlag = false;
-    public bool transferMap = true;
+    public bool transferMap= true;
 
     private bool canMove = true; //코루틴 반복 조건 변수
-    public bool notMove = false;
+    public bool notMove=false;
 
     private GameObject playobject;
 
-    Vector2 start;
-    Vector2 end;
+    public Vector2 start;
+    public Vector2 end;
     RaycastHit2D hit;
-
-    float x, y;
-    Rigidbody2D rigid;
-    Vector3 dirVec;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        if (instance == null)
+        if(instance == null)
         {
             DontDestroyOnLoad(this.gameObject); //맵이 이동해도 캐릭터 유지
-            instance = this;
+            instance=this;
         }
         else
         {
@@ -46,228 +42,136 @@ public class PlayerManager : MovingCharacter
 
     void Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider =GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
-<<<<<<< HEAD
-        rigid=GetComponent<Rigidbody2D>();
-=======
-        rigid = GetComponent<Rigidbody2D>();
->>>>>>> 069436597c9601d325f9f9becfdea59b23db3ca7
     }
 
+    IEnumerator MoveCoroutine()
+    {
+        //방향키 눌렸을 때
+        while(Input.GetAxisRaw("Vertical") !=0 || Input.GetAxisRaw("Horizontal")!=0 && !notMove)
+        {
+            //shift키 속도 빠르게
+            if(Input.GetKey(KeyCode.LeftShift))
+            {
+            applyRunSpeed = runSpeed;
+            applyRunFlag = true;
+            }
+            else
+            {
+                applyRunSpeed=0;
+                applyRunFlag = false;
+            }
+
+            //눌린값 vector에 저장
+            vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), transform.position.z);
+            //vector.x
+            if(vector.x !=0)
+                vector.y=0;
+            
+            //Animation
+            //설정한 파라미터 값: DirX, DirY
+            animator.SetFloat("DirX",vector.x);
+            animator.SetFloat("DirY",vector.y);
+
+            start =  transform.position; // a지점, 캐릭터의 현재 위치 값 
+            end = start + new Vector2(vector.x * speed * walkCount, vector.y * speed * walkCount);    //b지점, 캐릭터가 이동하고자하는 위치 값
+            
+            //Debug.Log(vector);
+            Debug.DrawRay(start,end, Color.red);
+            hit=Physics2D.Linecast(start,end, layerMask);
+            //RaycastHit2D hit= Physics2D.Raycast(this.transform.position, this.transform.forward, 30.0f,layerMask);
+
+            if(hit.collider != null )
+            {
+                break;
+            }  
+            
+            //상태 전이
+            animator.SetBool("Walking",true);
+
+            //48 픽셀 단위 움직임으로 전체 이동을 묶음
+            while(currentWalkCount < walkCount) 
+            {
+                //전체 이동하는 조건들
+                //x축
+                if(vector.x !=0)
+                {
+                    transform.Translate(vector.x*(speed+applyRunSpeed),0,0);
+
+                }
+                //y축
+                else if(vector.y !=0)
+                {
+                    transform.Translate(0,vector.y*(speed+applyRunSpeed),0);
+                }
+                
+                if(applyRunFlag)
+                {
+                    currentWalkCount ++; //shift 키 두번 증가
+                }
+                currentWalkCount ++; // 탈출하기 위한 조건 덧셈
+                yield return new WaitForSeconds(0.01f); // 2.4픽셀씩 움직이는 과정 보여주기 위함
+            }
+            currentWalkCount = 0 ; //초기화  
+        }
+        animator.SetBool("Walking",false); //walking 상태 원상복귀 -> Standing
+        canMove=true; //방향키 처리 원상복귀
+
+    }
 
     // Update is called once per frame
     void Update() //매 프레임마다 함수를 실행
-    {     //위치 입력 받기 , 레이캐스트
-<<<<<<< HEAD
+    {     //위치 입력 받기 , 레이캐스트]
     
-        vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), transform.position.z);
-        
-        //vector.x
-        if(vector.x !=0)
-            vector.y=0;
-        
-        //Animation
-        animator.SetFloat("DirX",vector.x);
-        animator.SetFloat("DirY",vector.y);
-
-        if(vector.x !=0 || vector.y !=0)
+        if (canMove && !notMove) //코루틴 반복 조건
         {
-            canMove= true;
-            animator.SetBool("Walking",true); 
-        }
-        else
-        {
-            canMove=false;
-            animator.SetBool("Walking",false);
-            animator.SetFloat("DirX",x);
-            animator.SetFloat("DirY",y);
-            Debug.Log(vector);
-=======
-
-        vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), transform.position.z);
-
-        //vector.x
-        if (vector.x != 0)
-            vector.y = 0;
-
-        //Animation
-        animator.SetFloat("DirX", vector.x);
-        animator.SetFloat("DirY", vector.y);
-
-        if (vector.x != 0 || vector.y != 0)
-        {
-            canMove = true;
-            animator.SetBool("Walking", true);
-        }
-        else
-        {
-            canMove = false;
-            animator.SetBool("Walking", false);
-            animator.SetFloat("DirX", x);
-            animator.SetFloat("DirY", y);
-            Debug.Log(vector);
-        }
-
-        //Direction
-        if (x == 1)
-            dirVec = Vector3.up;
-        else if (x == -1)
-            dirVec = Vector3.down;
-        else if (y == -1)
-            dirVec = Vector3.left;
-        else if (y == 1)
-            dirVec = Vector3.right;
-
-        //shift키 속도 빠르게
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            applyRunSpeed = runSpeed;
-            applyRunFlag = true;
-        }
-        else
-        {
-            applyRunSpeed = 0;
-            applyRunFlag = false;
->>>>>>> 069436597c9601d325f9f9becfdea59b23db3ca7
-        }
             
-        //Direction
-        if(x ==1)
-            dirVec=Vector3.up;
-        else if(x ==-1)
-            dirVec=Vector3.down;
-        else if(y ==-1)
-            dirVec=Vector3.left;
-        else if(y ==1)
-            dirVec=Vector3.right;
-
-<<<<<<< HEAD
-        //shift키 속도 빠르게
-        if(Input.GetKey(KeyCode.LeftShift))
-        {
-            applyRunSpeed = runSpeed;
-            applyRunFlag = true;
+            if(Input.GetAxisRaw("Horizontal")!=0 || Input.GetAxisRaw("Vertical") !=0)
+            {
+                canMove=false; //코루틴 반복 방지
+                StartCoroutine(MoveCoroutine());
+                
+            }
         }
-        else
-        {
-            applyRunSpeed=0;
-            applyRunFlag = false;
-        }
-        
     }
 
     void FixedUpdate()
     {
         //위치 결과로 애니메이션
-        //start =  transform.position;
-        //end = start +new Vector2(vector.x * speed * walkCount, vector.y * speed * walkCount);
-
-       if(canMove)
-       {
-            //전체 이동
-            //x축
-            if(vector.x!=0)
-            {
-                transform.Translate(vector.x*(speed+applyRunSpeed),0,0);
-                x=vector.x;
-                y=0;
-            }
-            //y축
-            else if(vector.y!=0)
-            {   
-                transform.Translate(0,vector.y*(speed+applyRunSpeed),0);
-                y=vector.y;
-                x=0;
-            }
-            if(applyRunFlag)
-            {
-                currentWalkCount ++; //shift 키 두번 증가
-            }
-            else
-            {
-                currentWalkCount = 0 ;
-            }
-            
-       }
-        start =  transform.position;
-        end= dirVec * 1f;
-        //rigid.velocity=start*speed;
-        //레이캐스트
-        Debug.DrawRay(start, end, Color.red);
-        hit=Physics2D.Linecast(start,end, layerMask);
-        if(hit.collider != null )
+        boxCollider.enabled=true;
+        //Debug.DrawRay(start, end, Color.red);
+        //RaycastHit2D hit= Physics2D.Raycast(this.transform.position, this.transform.forward, 50.0f,LayerMask.GetMask("Object"));
+        if(hit.collider != null)
         {
             playobject=hit.collider.gameObject;
             Debug.Log(playobject);
-            //theOM.Action(playobject);
-            /*if(Input.GetKey(KeyCode.Z))
-                {
-                    canMove=false;
-                    Debug.Log("z");
-                    theClue.Action(playobject);  
-                }*/
-        }  
+            if(Input.GetKey(KeyCode.Z))
+            {
+                canMove=false;
+                Debug.Log("z");
+                theClue.Action(playobject);  
+            }
+        }
         else
-            playobject=null;
-    }
-=======
-    }
-
-    void FixedUpdate()
-    {
-        //위치 결과로 애니메이션
-        //start =  transform.position;
-        //end = start +new Vector2(vector.x * speed * walkCount, vector.y * speed * walkCount);
-
-        if (canMove)
         {
-            //전체 이동
-            //x축
-            if (vector.x != 0)
+            playobject=null;
+        }
+
+        /*if( playobject != null)
+        {
+            if(Input.GetKey(KeyCode.Z))
             {
-                transform.Translate(vector.x * (speed + applyRunSpeed), 0, 0);
-                x = vector.x;
-                y = 0;
-            }
-            //y축
-            else if (vector.y != 0)
-            {
-                transform.Translate(0, vector.y * (speed + applyRunSpeed), 0);
-                y = vector.y;
-                x = 0;
-            }
-            if (applyRunFlag)
-            {
-                currentWalkCount++; //shift 키 두번 증가
+                canMove=false;
+                Debug.Log("z");
+                theClue.Action(playobject);  
             }
             else
             {
-                currentWalkCount = 0;
+                canMove=true;
+                Debug.Log("null");
             }
->>>>>>> 069436597c9601d325f9f9becfdea59b23db3ca7
-
-        }
-        start = transform.position;
-        end = dirVec * 1f;
-        //rigid.velocity=start*speed;
-        //레이캐스트
-        Debug.DrawRay(start, end, Color.red);
-        hit = Physics2D.Linecast(start, end, layerMask);
-        if (hit.collider != null)
-        {
-            playobject = hit.collider.gameObject;
-            Debug.Log(playobject);
-            //theOM.Action(playobject);
-            /*if(Input.GetKey(KeyCode.Z))
-                {
-                    canMove=false;
-                    Debug.Log("z");
-                    theClue.Action(playobject);  
-                }*/
-        }
-        else
-            playobject = null;
+            
+        }*/
     }
-
 }
