@@ -8,7 +8,7 @@ public class PlayerManager : MovingCharacter
 
     public string currentMapName; 
 
-    //public ClueManager theClue;
+    private ClueManager theClue;
 
     //shift 키를 누른 경우 속도 빨라짐
     public float runSpeed;
@@ -20,7 +20,7 @@ public class PlayerManager : MovingCharacter
     private bool canMove = true; //코루틴 반복 조건 변수
     public bool notMove=false;
 
-    private GameObject playobject;
+    public GameObject playobject;
 
     public Vector2 start;
     public Vector2 end;
@@ -44,6 +44,7 @@ public class PlayerManager : MovingCharacter
     {
         boxCollider =GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+        theClue=FindObjectOfType<ClueManager>();
     }
 
     IEnumerator MoveCoroutine()
@@ -151,6 +152,7 @@ public class PlayerManager : MovingCharacter
                 canMove=false;
                 Debug.Log("z");
                 theClue.Action(playobject);  
+                
             }
         }
         else

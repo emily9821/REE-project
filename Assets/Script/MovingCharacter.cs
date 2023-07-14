@@ -14,7 +14,6 @@ public class MovingCharacter : MonoBehaviour
     public Animator animator;
     public BoxCollider2D boxCollider;
     public LayerMask layerMask; 
-    public ClueManager theClue;
 
     
 }

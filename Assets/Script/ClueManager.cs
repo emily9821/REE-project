@@ -5,28 +5,25 @@ using UnityEngine;
 public class ClueManager : MonoBehaviour
 {
     
-    public Sprite target;
-    public SpriteRenderer view;
+    //public Sprite target;
+    //public SpriteRenderer view;
+
     public ObjData objData;
     public GameObject scanObj;
 
-    public RaycastHit2D hit;
-    LayerMask layerMask;
-    bool isclue=true;
+    //public RaycastHit2D hit;
+    //LayerMask layerMask;
+    public bool isclue;
 
-    //private PlayerManager thePlayer;
+    GameObject imgObject;
     private OrderManager theOrder;
-    private DialogueManager theDM;
-    private TalkDialogue talk;
-    private ObjectImage theclue;
+     
+  
 
     void Start()
     {
       //theclue=Resources.Load<GameObject>("ObjectImage");
       theOrder= FindObjectOfType<OrderManager>();
-      theDM= FindObjectOfType<DialogueManager>();
-      talk= FindObjectOfType<TalkDialogue>();
-      theclue=FindObjectOfType<ObjectImage>();
     }
 
     public void Action(GameObject scanObj)
@@ -39,30 +36,39 @@ public class ClueManager : MonoBehaviour
         {
             isclue=true;
             objData=scanObj.GetComponent<ObjData>();
-            showimage(objData.id, scanObj);
+            showimage(objData.id);
         }
     }
 
-    public void showimage(int id,GameObject targetObject)
+    public void showimage(int id)
     {
-        target=theclue.getImage(id);
+        //target=theclue.getImage(id);
     
-        if(target == null)
+        if(id == null)
         {
             isclue = false;
             return;
         }
+    
         else
         {
-            theOrder.NotMove();
+            Debug.Log(id);
+            if( id== 200)
+            {
+                imgObject=Resources.Load<GameObject>("outview");
+            }
+            imgObject=Instantiate(imgObject); 
             Transform p = GameObject.Find("Player").transform;
-            targetObject.transform.SetParent (p,false);
-            targetObject.name = "Clue Event Controller";
-            view.sprite=target;
-            Debug.Log("clue event controller");
+            imgObject.transform.SetParent (p);
+            imgObject.transform.localPosition=Vector3.zero;
+            imgObject.name = "outview";
+            
+            //view.sprite=target;
+            Debug.Log("outview");
+            theOrder.Move();
         }
         
-        isclue=true;
+        //isclue=true;
         /*
         if(message != null)
         {
