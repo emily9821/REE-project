@@ -8,6 +8,6 @@ public class ObjData : MonoBehaviour
     [TextArea(1,2)]  
     public string[] message;
 
-    public GameObject img;
+    //public GameObject img;
 
 }

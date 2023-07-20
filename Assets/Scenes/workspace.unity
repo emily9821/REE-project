@@ -256,6 +256,7 @@ GameObject:
   - component: {fileID: 332934223}
   - component: {fileID: 332934222}
   - component: {fileID: 332934224}
+  - component: {fileID: 332934225}
   m_Layer: 3
   m_Name: desk_up
   m_TagString: Untagged
@@ -340,6 +341,22 @@ MonoBehaviour:
     - "\uCC98\uC74C\uBCF4\uB294 \uC0AC\uC9C4\uC774\uB2E4. \uD604\uC0C1\uC774 \uC544\uC9C1
       \uB35C \uB41C \uB4EF \uD558\uB2E4."
     - "\uB0B4\uAC00 \uC774\uB7F0\uAC78 \uCC0D\uC740\uC801\uC774 \uC788\uB358\uAC00..?"
+--- !u!114 &332934225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332934221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bcb7b292e9d91f48bdaf0889071be60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 230
+  message:
+  - "\uCE74\uB97C\uC758 \uC140\uD53C \uC606\uC5D0 \uB204\uAD70\uAC00 \uC788\uB294
+    \uB4EF\uD558\uB2E4"
 --- !u!1 &520368565
 GameObject:
   m_ObjectHideFlags: 0

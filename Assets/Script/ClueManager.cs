@@ -9,66 +9,85 @@ public class ClueManager : MonoBehaviour
     //public SpriteRenderer view;
 
     public ObjData objData;
+    int id;
     public GameObject scanObj;
 
     //public RaycastHit2D hit;
     //LayerMask layerMask;
-    public bool isclue;
+
+    public bool isclue=false;
 
     GameObject imgObject;
-    private OrderManager theOrder;
      
   
 
     void Start()
     {
       //theclue=Resources.Load<GameObject>("ObjectImage");
-      theOrder= FindObjectOfType<OrderManager>();
+    //   theOrder= FindObjectOfType<OrderManager>();
     }
 
-    public void Action(GameObject scanObj)
-    {
-        if(isclue)
-        {
-            isclue=false;
-        }
-        else
-        {
-            isclue=true;
-            objData=scanObj.GetComponent<ObjData>();
-            showimage(objData.id);
-        }
-    }
+    // public void Action(GameObject scanObj)
+    // {
+    //     if(isclue)
+    //     {
+    //         isclue=false;
+    //     }
+    //     else
+    //     {
+    //         // isclue=true;
+    //         objData=scanObj.GetComponent<ObjData>();
+    //         showimage(objData.id); 
+    //     }
+    // }
 
-    public void showimage(int id)
+
+    public int showimage(GameObject scanObj)
     {
-        //target=theclue.getImage(id);
-    
-        if(id == null)
-        {
-            isclue = false;
-            return;
-        }
-    
+        objData=scanObj.GetComponent<ObjData>();
+        if(objData == null)
+            return 0;
         else
         {
-            Debug.Log(id);
-            if( id== 200)
+            id=objData.id;
+
+            if(id == null)
             {
-                imgObject=Resources.Load<GameObject>("outview");
+                isclue = false;
+                return 0;
             }
-            imgObject=Instantiate(imgObject); 
-            Transform p = GameObject.Find("Player").transform;
-            imgObject.transform.SetParent (p);
-            imgObject.transform.localPosition=Vector3.zero;
-            imgObject.name = "outview";
-            
-            //view.sprite=target;
-            Debug.Log("outview");
-            theOrder.Move();
+            else
+            {
+                Debug.Log(id);
+                switch(id)
+                {
+                    case 210: //room1 팩상 위 신문기사
+                        //imgObject=Resources.Load<GameObject>("신문");
+                        break;
+                    case 220:  //작업실 문 앞 메모지
+                        //imgObject=Resources.Load<GameObject>("메모지");
+                        break;
+                    case 230: //작업실 책상 위 사진
+                        //imgObject=Resources.Load<GameObject>("형제 셀피");
+                        break;
+                    case 250:  //베란다 낙간 도심 풍경
+                        imgObject=Resources.Load<GameObject>("outview");
+                        break;
+                    default:
+                        break;
+                }
+                
+                imgObject=Instantiate(imgObject); 
+                Transform p = GameObject.Find("Player").transform;
+                imgObject.transform.SetParent (p);
+                imgObject.transform.localPosition=Vector3.zero;
+                imgObject.name = "outview";
+                Debug.Log("outview");
+                isclue = false;
+                return 1;
+            }
         }
         
-        //isclue=true;
         /*
         if(message != null)
         {
@@ -85,23 +104,14 @@ public class ClueManager : MonoBehaviour
         */
     }
 
+    public void closeimage()
+    {
+        Destroy(imgObject,2f);
+    }
+
     void Update()
     {
-
     }
-
-   /* void Start()
-    {
-        thePM=FindObjectOfType<PlayerManager>();
-        theOrder= FindObjectOfType<OrderManager>();
-        scenename roomname;
-
-        layerMask = LayerMask.GetMask("NoPassing");
-        target = Resources.Load<GameObject>("Clue Event Controller");
-        target = Instantiate(target);
-        
-    }
-*/
 
     
 

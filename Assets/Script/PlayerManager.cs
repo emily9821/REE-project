@@ -18,13 +18,21 @@ public class PlayerManager : MovingCharacter
     public bool transferMap= true;
 
     private bool canMove = true; //코루틴 반복 조건 변수
+
     public bool notMove=false;
+
+    private bool imgevent= false;
+    public int realimg=0;
+    // private float imgeventDelay;
+    // private float currentImgeventDelay;
 
     public GameObject playobject;
 
     public Vector2 start;
     public Vector2 end;
     RaycastHit2D hit;
+
+    
 
     // Start is called before the first frame update
     private void Awake()
@@ -50,7 +58,7 @@ public class PlayerManager : MovingCharacter
     IEnumerator MoveCoroutine()
     {
         //방향키 눌렸을 때
-        while(Input.GetAxisRaw("Vertical") !=0 || Input.GetAxisRaw("Horizontal")!=0 && !notMove)
+        while(Input.GetAxisRaw("Vertical") !=0 || Input.GetAxisRaw("Horizontal")!=0 && !notMove && !imgevent)
         {
             //shift키 속도 빠르게
             if(Input.GetKey(KeyCode.LeftShift))
@@ -125,15 +133,53 @@ public class PlayerManager : MovingCharacter
     void Update() //매 프레임마다 함수를 실행
     {     //위치 입력 받기 , 레이캐스트]
     
-        if (canMove && !notMove) //코루틴 반복 조건
+        if (canMove && !notMove && !imgevent) //코루틴 반복 조건
         {
-            
             if(Input.GetAxisRaw("Horizontal")!=0 || Input.GetAxisRaw("Vertical") !=0)
             {
                 canMove=false; //코루틴 반복 방지
                 StartCoroutine(MoveCoroutine());
-                
             }
+        }
+
+        if(!notMove && !imgevent)
+        {
+            if (hit.collider != null)
+            {
+                playobject = hit.collider.gameObject;
+                Debug.Log(playobject);
+                if (Input.GetKeyDown(KeyCode.Z))
+                {
+                    Debug.Log("z");
+                    // currentImgeventDelay = imgeventDelay;
+                    imgevent= true;
+                    realimg=theClue.showimage(playobject);
+                }
+            }
+            else
+            {
+                playobject = null;
+            }
+        }
+
+        if(imgevent)
+        {
+            if(realimg == 0)
+                imgevent= false;
+            else if(realimg ==1)
+            {
+                notMove=true;
+                theClue.closeimage();
+            }
+            notMove=false;
+            imgevent= false;
+            realimg = 0;
+            // currentImgeventDelay -= Time.deltaTime;
+            // if (currentImgeventDelay <= 0)
+            // {
+            //     theClue.closeimage();
+            //     imgevent= false;
+            // }
         }
     }
 
@@ -143,37 +189,22 @@ public class PlayerManager : MovingCharacter
         boxCollider.enabled=true;
         //Debug.DrawRay(start, end, Color.red);
         //RaycastHit2D hit= Physics2D.Raycast(this.transform.position, this.transform.forward, 50.0f,LayerMask.GetMask("Object"));
-        if(hit.collider != null)
-        {
-            playobject=hit.collider.gameObject;
-            Debug.Log(playobject);
-            if(Input.GetKey(KeyCode.Z))
-            {
-                canMove=false;
-                Debug.Log("z");
-                theClue.Action(playobject);  
+        //if(hit.collider != null)
+        //{
+        //    playobject=hit.collider.gameObject;
+        //    Debug.Log(playobject);
+        //    if(Input.GetKeyDown(KeyCode.Z))
+        //    {
+        //        //canMove=false;
+        //        Debug.Log("z");
+        //        theClue.Action(playobject);  
                 
-            }
-        }
-        else
-        {
-            playobject=null;
-        }
+        //    }
+        //}
+        //else
+        //{
+        //    playobject=null;
+        //}
 
-        /*if( playobject != null)
-        {
-            if(Input.GetKey(KeyCode.Z))
-            {
-                canMove=false;
-                Debug.Log("z");
-                theClue.Action(playobject);  
-            }
-            else
-            {
-                canMove=true;
-                Debug.Log("null");
-            }
-            
-        }*/
     }
 }
