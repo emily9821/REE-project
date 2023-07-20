@@ -27,6 +27,7 @@ public class PlayerManager : MovingCharacter
     // private float currentImgeventDelay;
 
     public GameObject playobject;
+    public int currentDay=1; //현재 day
 
     public Vector2 start;
     public Vector2 end;
@@ -151,9 +152,8 @@ public class PlayerManager : MovingCharacter
                 if (Input.GetKeyDown(KeyCode.Z))
                 {
                     Debug.Log("z");
-                    // currentImgeventDelay = imgeventDelay;
                     imgevent= true;
-                    realimg=theClue.showimage(playobject);
+                    realimg=theClue.showimage(currentDay,playobject);
                 }
             }
             else
@@ -164,6 +164,7 @@ public class PlayerManager : MovingCharacter
 
         if(imgevent)
         {
+            Debug.Log(realimg);
             if(realimg == 0)
                 imgevent= false;
             else if(realimg ==1)

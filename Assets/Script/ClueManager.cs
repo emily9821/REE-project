@@ -18,13 +18,14 @@ public class ClueManager : MonoBehaviour
     public bool isclue=false;
 
     GameObject imgObject;
-     
-  
+    private DataBaseManager theDB; 
+    private int i_db=0;
 
     void Start()
     {
       //theclue=Resources.Load<GameObject>("ObjectImage");
-    //   theOrder= FindObjectOfType<OrderManager>();
+        //theOrder= FindObjectOfType<OrderManager>();
+        theDB=FindObjectOfType<DataBaseManager>();
     }
 
     // public void Action(GameObject scanObj)
@@ -42,7 +43,7 @@ public class ClueManager : MonoBehaviour
     // }
 
 
-    public int showimage(GameObject scanObj)
+    public int showimage(int currentdate,GameObject scanObj)
     {
         objData=scanObj.GetComponent<ObjData>();
         if(objData == null)
@@ -61,7 +62,7 @@ public class ClueManager : MonoBehaviour
                 Debug.Log(id);
                 switch(id)
                 {
-                    case 210: //room1 팩상 위 신문기사
+                    case 210: //room1 책상 위 신문기사
                         //imgObject=Resources.Load<GameObject>("신문");
                         break;
                     case 220:  //작업실 문 앞 메모지
@@ -71,12 +72,14 @@ public class ClueManager : MonoBehaviour
                         //imgObject=Resources.Load<GameObject>("형제 셀피");
                         break;
                     case 250:  //베란다 낙간 도심 풍경
-                        imgObject=Resources.Load<GameObject>("outview");
+                        imgObject=Resources.Load<GameObject>("ItemImg/"+"outview");
                         break;
                     default:
                         break;
                 }
                 
+                
+
                 imgObject=Instantiate(imgObject); 
                 Transform p = GameObject.Find("Player").transform;
                 imgObject.transform.SetParent (p);
@@ -84,6 +87,7 @@ public class ClueManager : MonoBehaviour
                 imgObject.name = "outview";
                 Debug.Log("outview");
                 isclue = false;
+                FindImgItem(id, currentdate);
                 return 1;
             }
         }
@@ -104,11 +108,78 @@ public class ClueManager : MonoBehaviour
         */
     }
 
+    public void FindImgItem(int _ObjID, int _day) //DB 검색
+    {
+        // switch(_day) //day마다 다른 DB list 검색
+            if(_day==1) 
+            {
+                for( int i=0; i< theDB.itemList1.Count; i++)
+                {
+                    if(_ObjID == theDB.itemList1[i].imgid)
+                    {
+                        // imgObject=Resources.Load<GameObject>("ItemImg/"+theDB.itemList1[i].imgname);
+                        i_db=i;
+                        
+                        break;
+                    }
+                }
+            }
+            // else if(_day ==2)
+            // {
+            //     for( int i=0; i< theDB.itemList2.Count; i++)
+            //     {
+            //         if(_ObjID == theDB.itemList2[i].imgid)
+            //         {
+            //             imgObject=Resources.Load<GameObject>(theDB.itemList2[i].imgname);
+            //             break;
+            //         }
+            //     }
+            // }
+            // else if(_day==3) 
+            // {
+            //     for( int i=0; i< theDB.itemList3.Count; i++)
+            //     {
+            //         if(_ObjID == theDB.itemList3[i].imgid)
+            //         {
+            //             imgObject=Resources.Load<GameObject>(theDB.itemList3[i].imgname);
+            //             break;
+            //         }
+            //     }
+            // }
+            // else if(_day ==4)
+            // {
+            //     for( int i=0; i< theDB.itemList4.Count; i++)
+            //     {
+            //         if(_ObjID == theDB.itemList4[i].imgid)
+            //         {
+            //             imgObject=Resources.Load<GameObject>(theDB.itemList4[i].imgname);
+            //             break;
+            //         }
+            //     }
+            // }
+            // else if(_day ==5)
+            // {
+            //     for( int i=0; i< theDB.itemList5.Count; i++)
+            //     {
+            //         if(_ObjID == theDB.itemList5[i].imgid)
+            //         {
+            //             imgObject=Resources.Load<GameObject>(theDB.itemList5[i].imgname);
+            //             break;
+            //         }
+            //     }
+            // }
+            else
+            {
+                Debug.LogError("데이터베이스에 해당 ID 값을 가진 object img/item 이 존재하지 않습니다.");
+            }
+        Debug.Log(_day);
+        
+    }
+    
     public void closeimage()
     {
         Destroy(imgObject,2f);
     }
-
     void Update()
     {
     }
