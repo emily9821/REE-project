@@ -104,9 +104,6 @@ public class ClueManager : MonoBehaviour
         clone.GetComponent<PopupText>().text.text = theDB.itemList1[i_db].imgDescription;
         clone.transform.SetParent(this.transform);
     }
-
-    day - obj  
-
  
        public void FindImgItem(int _ObjID, int _day) //DB 검색
     {
