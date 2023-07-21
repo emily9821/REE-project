@@ -76,7 +76,7 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator StartDialogueCoroutine()
     {
-        Debug.Log(count);
+        //Debug.Log(count);
         yield return new WaitForSeconds(0.01f);
         for(int i=0; i<listSentences[count].Length ; i++)
         {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerManager : MovingCharacter
 {
     static public PlayerManager instance;
@@ -27,7 +28,7 @@ public class PlayerManager : MovingCharacter
     // private float currentImgeventDelay;
 
     public GameObject playobject;
-    public int currentDay=1; //현재 day
+    public int day=1; //현재 day
 
     public Vector2 start;
     public Vector2 end;
@@ -94,6 +95,7 @@ public class PlayerManager : MovingCharacter
 
             if(hit.collider != null )
             {
+                playobject = hit.collider.gameObject;
                 break;
             }  
             
@@ -143,24 +145,26 @@ public class PlayerManager : MovingCharacter
             }
         }
 
-        if(!notMove && !imgevent)
+
+
+        if (!notMove && !imgevent)
         {
-            if (hit.collider != null)
+            if (hit.collider != null && Input.GetKeyDown(KeyCode.Z))
             {
-                playobject = hit.collider.gameObject;
+                //playobject = hit.collider.gameObject;
                 Debug.Log(playobject);
-                if (Input.GetKeyDown(KeyCode.Z))
-                {
-                    Debug.Log("z");
-                    imgevent= true;
-                    realimg=theClue.showimage(currentDay,playobject);
-                }
+                Debug.Log("z");
+                imgevent = true;
+                realimg = theClue.showimage(day, playobject);
             }
             else
             {
                 playobject = null;
             }
         }
+
+        
+        
 
         if(imgevent)
         {
@@ -175,37 +179,7 @@ public class PlayerManager : MovingCharacter
             notMove=false;
             imgevent= false;
             realimg = 0;
-            // currentImgeventDelay -= Time.deltaTime;
-            // if (currentImgeventDelay <= 0)
-            // {
-            //     theClue.closeimage();
-            //     imgevent= false;
-            // }
         }
     }
 
-    void FixedUpdate()
-    {
-        //위치 결과로 애니메이션
-        boxCollider.enabled=true;
-        //Debug.DrawRay(start, end, Color.red);
-        //RaycastHit2D hit= Physics2D.Raycast(this.transform.position, this.transform.forward, 50.0f,LayerMask.GetMask("Object"));
-        //if(hit.collider != null)
-        //{
-        //    playobject=hit.collider.gameObject;
-        //    Debug.Log(playobject);
-        //    if(Input.GetKeyDown(KeyCode.Z))
-        //    {
-        //        //canMove=false;
-        //        Debug.Log("z");
-        //        theClue.Action(playobject);  
-                
-        //    }
-        //}
-        //else
-        //{
-        //    playobject=null;
-        //}
-
-    }
 }
