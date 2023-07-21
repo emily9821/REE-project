@@ -16,6 +16,9 @@ public class EventOptionHandler : MonoBehaviour
     private Canvas palette;
     private Button selection;
     private List<Button> buttons;
+    private readonly WaitForSeconds waitTimeWhenWrong = new WaitForSeconds(2.5f);
+
+    private float ySize = 135f;
 
     private void Awake()
     {
@@ -25,11 +28,13 @@ public class EventOptionHandler : MonoBehaviour
 
     void Start()
     {
-        
+        Show();
     }
 
     public void Show()
     {
+        float initYPos = ySize * options.Length / 2f;
+        SpriteRenderer a;
         SetSelectionDetail(selection, options[0]);
         for (int i = 1; i < options.Length; i++)
         {
@@ -53,7 +58,23 @@ public class EventOptionHandler : MonoBehaviour
 
     private void ShowText(string msg)
     {
+        StartCoroutine(AnswerRoutine(msg));
+    }
 
+    private void OnOffAllButton(bool isOn = false)
+    {
+        buttons.ForEach(x => x.gameObject.SetActive(isOn));
+    }
+
+    private void SetMainText(string msg) => words.text = msg;
+
+    IEnumerator AnswerRoutine(string msgWhenWrong)
+    {
+        OnOffAllButton(false);
+        SetMainText(msgWhenWrong);
+        yield return waitTimeWhenWrong;
+        SetMainText("");
+        OnOffAllButton(true);
     }
 }
 
