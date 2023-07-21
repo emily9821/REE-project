@@ -22,12 +22,13 @@ public class PopupText : MonoBehaviour
     void Update()
     {
         //vector &textvector
+        text.transform.localPosition=Vector3.zero;
 
         destroyTime -= Time.deltaTime;
 
         if(destroyTime<=0)
         {
-            destroyTime(this.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

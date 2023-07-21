@@ -11,6 +11,7 @@ public class ClueManager : MonoBehaviour
     public ObjData objData;
     int id;
     public GameObject scanObj;
+    private string imgname;
 
     //public RaycastHit2D hit;
     //LayerMask layerMask;
@@ -18,6 +19,7 @@ public class ClueManager : MonoBehaviour
     public bool isclue=false;
 
     GameObject imgObject;
+    public GameObject prefab_text;
     private DataBaseManager theDB; 
     private int i_db=0;
 
@@ -27,20 +29,6 @@ public class ClueManager : MonoBehaviour
         //theOrder= FindObjectOfType<OrderManager>();
         theDB=FindObjectOfType<DataBaseManager>();
     }
-
-    // public void Action(GameObject scanObj)
-    // {
-    //     if(isclue)
-    //     {
-    //         isclue=false;
-    //     }
-    //     else
-    //     {
-    //         // isclue=true;
-    //         objData=scanObj.GetComponent<ObjData>();
-    //         showimage(objData.id); 
-    //     }
-    // }
 
 
     public int showimage(int currentdate,GameObject scanObj)
@@ -60,6 +48,7 @@ public class ClueManager : MonoBehaviour
             else
             {
                 Debug.Log(id);
+                //obj ID 에 따른 이미지 로드
                 switch(id)
                 {
                     case 210: //room1 책상 위 신문기사
@@ -73,21 +62,21 @@ public class ClueManager : MonoBehaviour
                         break;
                     case 250:  //베란다 낙간 도심 풍경
                         imgObject=Resources.Load<GameObject>("ItemImg/"+"outview");
+                        imgname="outview";
                         break;
                     default:
                         break;
                 }
                 
-                
-
                 imgObject=Instantiate(imgObject); 
                 Transform p = GameObject.Find("Player").transform;
                 imgObject.transform.SetParent (p);
                 imgObject.transform.localPosition=Vector3.zero;
-                imgObject.name = "outview";
-                Debug.Log("outview");
+                imgObject.name = imgname;
+                Debug.Log(imgname);
                 isclue = false;
-                FindImgItem(id, currentdate);
+
+                // FindImgItem(id, currentdate);
                 return 1;
             }
         }
@@ -108,14 +97,25 @@ public class ClueManager : MonoBehaviour
         */
     }
 
-    public void FindImgItem(int _ObjID, int _day) //DB 검색
+
+    public void showText()
+    {
+        var clone=Instantiate(prefab_text, PlayerManager.instance.transform.position, Quaternion.Euler(Vector3.zero));
+        clone.GetComponent<PopupText>().text.text = theDB.itemList1[i_db].imgDescription;
+        clone.transform.SetParent(this.transform);
+    }
+
+    day - obj  
+
+ 
+       public void FindImgItem(int _ObjID, int _day) //DB 검색
     {
         // switch(_day) //day마다 다른 DB list 검색
             if(_day==1) 
             {
                 for( int i=0; i< theDB.itemList1.Count; i++)
                 {
-                    if(_ObjID == theDB.itemList1[i].imgid)
+                    if(_ObjID == theDB.itemList1[i].imgId)
                     {
                         // imgObject=Resources.Load<GameObject>("ItemImg/"+theDB.itemList1[i].imgname);
                         i_db=i;
@@ -180,6 +180,7 @@ public class ClueManager : MonoBehaviour
     {
         Destroy(imgObject,2f);
     }
+
     void Update()
     {
     }

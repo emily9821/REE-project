@@ -5,8 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class ImgItem 
 {
-    public string imgname; //이미지 이름
-    public int imgid; //이미지 아이디 (현재는 object id로 일치시켜놓음)
+    public string imgName; //이미지 이름
+    public int imgId; //이미지 아이디 (현재는 object id로 일치시켜놓음)
     public string imgDescription; //이미지 설명 (대사창 나옴)
     public int imgCount; // 하나의 object에 있는 이미지 개수
     public Sprite imgIcon; //이미지 스프라이트
@@ -23,8 +23,8 @@ public class ImgItem
 
     public ImgItem(string _imgname,int _imgid, string _imgDes, ImgDate _imgDate, int _imgCount=1)
     {
-        imgname= _imgname;
-        imgid= _imgid;
+        imgName= _imgname;
+        imgId= _imgid;
         imgDescription= _imgDes;
         imgCount = _imgCount;
         imgDate=_imgDate;

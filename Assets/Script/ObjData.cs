@@ -10,4 +10,5 @@ public class ObjData : MonoBehaviour
 
     //public GameObject img;
 
-}
+} 
+
