@@ -60,7 +60,6 @@ public class DialogueManager : MonoBehaviour
             Debug.Log(listSentences[i]);
         }
         dialoguePanel.SetActive(talking);
-        Debug.Log("hit");
         StartCoroutine(StartDialogueCoroutine());
     }
 

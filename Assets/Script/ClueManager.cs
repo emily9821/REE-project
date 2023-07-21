@@ -21,7 +21,6 @@ public class ClueManager : MonoBehaviour
     {
         Instantiate(Resources.Load<GameObject>("Item_Prefab"));
         sceneitemmanager=FindObjectOfType<SceneItemManager>();
-        renderer = GetComponent<SpriteRenderer>();
     }
 
 
@@ -33,19 +32,19 @@ public class ClueManager : MonoBehaviour
         //item 찾기
         renderer.sprite=Item_Prefab.ITEM[_day][scanObj.name].img;
 
-            if(renderer.sprite == null)
-            {
-                isclue = false;
-                return 0;
-            }
-            else
-            {
-                //이미지 로드
-                renderer.gameObject.SetActive(true);
-                Debug.Log(scanObj.name);
-                isclue = false;
-                return 1;
-            }
+        if (renderer.sprite == null)
+        {
+            isclue = false;
+            return 0;
+        }
+        else
+        {
+            //이미지 로드
+            renderer.gameObject.SetActive(true);
+            Debug.Log(scanObj.name);
+            isclue = false;
+            return 1;
+        }
         
         
     }
@@ -53,9 +52,7 @@ public class ClueManager : MonoBehaviour
 
     // public void showText()
     // {
-    //     var clone=Instantiate(prefab_text, PlayerManager.instance.transform.position, Quaternion.Euler(Vector3.zero));
-    //     clone.GetComponent<PopupText>().text.text = theDB.itemList1[i_db].imgDescription;
-    //     clone.transform.SetParent(this.transform);
+    //     
     // }
 
     
@@ -66,7 +63,12 @@ public class ClueManager : MonoBehaviour
 
     void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            if (renderer.gameObject.activeSelf) //activeSelf gameobject on/off 판단
+                renderer.gameObject.SetActive(false);
+        }
+            
     }
 
 

@@ -89,7 +89,7 @@ public class PlayerManager : MovingCharacter
             end = start + new Vector2(vector.x * speed * walkCount, vector.y * speed * walkCount);    //b지점, 캐릭터가 이동하고자하는 위치 값
             
             //Debug.Log(vector);
-            Debug.DrawRay(start,end, Color.red);
+            Debug.DrawLine(start,end, Color.red);
             hit=Physics2D.Linecast(start,end, layerMask);
             //RaycastHit2D hit= Physics2D.Raycast(this.transform.position, this.transform.forward, 30.0f,layerMask);
 
@@ -98,6 +98,10 @@ public class PlayerManager : MovingCharacter
                 playobject = hit.collider.gameObject;
                 break;
             }  
+            else
+            {
+                playobject = null;
+            }
             
             //상태 전이
             animator.SetBool("Walking",true);
@@ -146,10 +150,10 @@ public class PlayerManager : MovingCharacter
         }
 
 
-
+//멈췄을때 코루틴정지 -> playobject null ,동작x
         if (!notMove && !imgevent)
         {
-            if (hit.collider != null && Input.GetKeyDown(KeyCode.Z))
+            if (playobject != null && Input.GetKeyDown(KeyCode.Z))
             {
                 //playobject = hit.collider.gameObject;
                 Debug.Log(playobject);
@@ -163,8 +167,7 @@ public class PlayerManager : MovingCharacter
             }
         }
 
-        
-        
+                
 
         if(imgevent)
         {
@@ -174,7 +177,7 @@ public class PlayerManager : MovingCharacter
             else if(realimg ==1)
             {
                 notMove=true;
-                theClue.closeimage();
+                // theClue.closeimage();
             }
             notMove=false;
             imgevent= false;
