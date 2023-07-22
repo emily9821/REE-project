@@ -6,7 +6,7 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManager instance;
+    public static DialogueManager instance; //생성
 
     #region Singleton
     private void Awake()
@@ -43,6 +43,8 @@ public class DialogueManager : MonoBehaviour
         count=0;
         text.text= "";
         listSentences = new List<string>();
+        if (dialoguePanel.activeSelf) //activeSelf gameobject on/off 판단
+                talking= false;
         dialoguePanel.SetActive(talking);
         theOrder= FindObjectOfType<OrderManager>();
         //dialogue=FindObjectOfType<TalkDialogue>();
