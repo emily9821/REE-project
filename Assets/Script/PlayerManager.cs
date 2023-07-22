@@ -34,6 +34,8 @@ public class PlayerManager : MovingCharacter
     public Vector2 end;
     RaycastHit2D hit;
 
+    private Vector3 normalizedDir = Vector2.down;
+    private float[] dirs = new float[2];
     
 
     // Start is called before the first frame update
@@ -79,7 +81,10 @@ public class PlayerManager : MovingCharacter
             //vector.x
             if(vector.x !=0)
                 vector.y=0;
-            
+
+            Debug.Log(vector.x);
+            SetDir(vector);
+
             //Animation
             //설정한 파라미터 값: DirX, DirY
             animator.SetFloat("DirX",vector.x);
@@ -89,8 +94,8 @@ public class PlayerManager : MovingCharacter
             end = start + new Vector2(vector.x * speed * walkCount, vector.y * speed * walkCount);    //b지점, 캐릭터가 이동하고자하는 위치 값
             
             //Debug.Log(vector);
-            Debug.DrawLine(start,end, Color.red);
-            hit=Physics2D.Linecast(start,end, layerMask);
+            //Debug.DrawLine(start,end, Color.red);
+            hit=Physics2D.Linecast(start, end, layerMask);
             //RaycastHit2D hit= Physics2D.Raycast(this.transform.position, this.transform.forward, 30.0f,layerMask);
 
             if(hit.collider != null )
@@ -100,6 +105,7 @@ public class PlayerManager : MovingCharacter
             }  
             else
             {
+                //Debug.Log("NULLLL");
                 playobject = null;
             }
             
@@ -139,7 +145,9 @@ public class PlayerManager : MovingCharacter
     // Update is called once per frame
     void Update() //매 프레임마다 함수를 실행
     {     //위치 입력 받기 , 레이캐스트]
-    
+        var objDetection = Physics2D.Linecast(transform.position, transform.position + normalizedDir * 50f, layerMask);
+        Debug.DrawLine(transform.position, transform.position + normalizedDir * 100, Color.blue);
+        //Debug.Log(normalizedDir);
         if (canMove && !notMove && !imgevent) //코루틴 반복 조건
         {
             if(Input.GetAxisRaw("Horizontal")!=0 || Input.GetAxisRaw("Vertical") !=0)
@@ -153,17 +161,14 @@ public class PlayerManager : MovingCharacter
 //멈췄을때 코루틴정지 -> playobject null ,동작x
         if (!notMove && !imgevent)
         {
-            if (playobject != null && Input.GetKeyDown(KeyCode.Z))
+            //Debug.Log(objDetection.collider);
+            if (objDetection.collider != null && Input.GetKeyDown(KeyCode.Z))
             {
                 //playobject = hit.collider.gameObject;
                 Debug.Log(playobject);
                 Debug.Log("z");
                 imgevent = true;
-                realimg = theClue.showimage(day, playobject);
-            }
-            else
-            {
-                playobject = null;
+                realimg = theClue.showimage(day, objDetection.collider.gameObject);
             }
         }
 
@@ -185,4 +190,31 @@ public class PlayerManager : MovingCharacter
         }
     }
 
+
+    private void SetDir(Vector3 dir)
+    {
+        if (dir.magnitude <= 0.1f)
+            return;
+
+        dirs[0] = dir.x;
+        dirs[1] = dir.y;
+
+        float biggest = -1f;
+        int idx = -1;
+        for (int i = 0; i < dirs.Length; i++)
+        {
+            if (Mathf.Abs(dirs[i]) > biggest)
+            {
+                biggest = Mathf.Abs(dirs[i]);
+                idx = i;
+            }
+        }
+        biggest = dirs[idx];
+        dirs[0] = idx == 0 ? biggest : 0;
+        dirs[1] = idx == 1 ? biggest : 0;
+        dir = new Vector3(dirs[0], dirs[1]);
+
+        normalizedDir = dir.normalized;
+        return;
+    }
 }
