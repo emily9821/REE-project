@@ -13,15 +13,18 @@ public class Example0721Main : MonoBehaviour
 
     void Start()
     {
-        management = FindObjectOfType<SceneItemManagement>();
+        //EventOptionHandler.Call("Apple");
+        var e = EventOptionHandler.Call("Room1");
+        e.AddEvent(() => Debug.Log("Good"));
+        //management = FindObjectOfType<SceneItemManagement>();
 
-        ITEM.Add(new Dictionary<int, Item>()); // day 0
-        ITEM.Add(new Dictionary<int, Item>()); // day 1
-        ITEM.Add(new Dictionary<int, Item>());
-        ITEM.Add(new Dictionary<int, Item>());
-        ITEM.Add(new Dictionary<int, Item>());
+        //ITEM.Add(new Dictionary<int, Item>()); // day 0
+        //ITEM.Add(new Dictionary<int, Item>()); // day 1
+        //ITEM.Add(new Dictionary<int, Item>());
+        //ITEM.Add(new Dictionary<int, Item>());
+        //ITEM.Add(new Dictionary<int, Item>());
 
-        _sprite = ITEM[2][300].img;
+        //_sprite = ITEM[2][300].img;
 
         //fruitItems.Add(new FruitItem());
         //FruitItem fruit = fruitItems.Find(target => target.id == 0);
