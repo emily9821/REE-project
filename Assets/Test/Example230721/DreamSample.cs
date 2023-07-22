@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DreamSample : MonoBehaviour
 {
-    public Dream[] dreams;
+    public _Dream[] dreams;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +28,7 @@ public class DreamSample : MonoBehaviour
 }
 
 [System.Serializable]
-public class Dream
+public class _Dream
 {
     public string dreamName;
     public string detailDescription;

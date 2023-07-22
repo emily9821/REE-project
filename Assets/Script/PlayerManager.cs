@@ -28,7 +28,7 @@ public class PlayerManager : MovingCharacter
     // private float currentImgeventDelay;
 
     public GameObject playobject;
-    public int day=1; //현재 day
+    public static int day=1; //현재 day
 
     public Vector2 start;
     public Vector2 end;
