@@ -63,11 +63,21 @@ public class CameraManager : MonoBehaviour
             //Time.deltaTime :  1초에 실행되는 프레임의 역수 .1초에 60 프레임이 실행된다면, 60 분의 1값을 지님.
             //1초에 moveSpeed 만큼 이동
 
-            float clampedX = Mathf.Clamp(this.transform.position.x, minBound.x+halfWidth,maxBound.x-halfWidth);
-            float clampedY= Mathf.Clamp(this.transform.position.y, minBound.y+halfHeight,maxBound.y-halfHeight);
-        
-            this.transform.position = new Vector3(clampedX,clampedY, this.transform.position.z);
+            float l = minBound.x + halfWidth;
+            float r = maxBound.x - halfWidth;
+            if (l > r)
+                Swap(ref l, ref r);
+
+            float clampedX = Mathf.Clamp(this.transform.position.x, l, r);
+            float clampedY = Mathf.Clamp(this.transform.position.y, minBound.y + halfHeight, maxBound.y - halfHeight);
+
+            this.transform.position = new Vector3(clampedX, clampedY, this.transform.position.z);
         }
+    }
+
+    private void Swap(ref float l, ref float r)
+    {
+        (l, r) = (r, l);
     }
 
     public void SetBound(BoxCollider2D newBound)

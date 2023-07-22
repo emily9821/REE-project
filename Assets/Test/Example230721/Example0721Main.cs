@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,6 @@ public class Example0721Main : MonoBehaviour
     {
         //EventOptionHandler.Call("Apple");
         var e = EventOptionHandler.Call("Room1");
-        e.AddEvent(() => Debug.Log("Good"));
         //management = FindObjectOfType<SceneItemManagement>();
 
         //ITEM.Add(new Dictionary<int, Item>()); // day 0

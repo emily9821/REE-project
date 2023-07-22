@@ -38,7 +38,7 @@ public class EventOptionHandler : MonoBehaviour
             if (item.name == monologueName)
             {
                 item.Show();
-                return null;
+                return item;
             }
         }
         var monologueInAsset = Resources.Load<EventOptionHandler>("MonologueEvents/" + monologueName);
