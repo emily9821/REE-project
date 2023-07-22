@@ -19,9 +19,8 @@ public class EventOptionHandler : MonoBehaviour
     private Canvas palette;
     private Button selection;
     private List<Button> buttons;
-    private readonly WaitForSeconds waitTimeWhenWrong = new WaitForSeconds(2.5f);
-
     private Vector2 btnOriginPos;
+    private readonly WaitForSeconds waitTimeWhenWrong = new WaitForSeconds(2.5f);
 
     private void Awake()
     {
