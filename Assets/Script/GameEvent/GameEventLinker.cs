@@ -10,11 +10,22 @@ public class GameEventLinker
     public static bool IsAvailable(string targetEventName, Action targetEvent = null)
     {
         if (!linkedEvent.ContainsKey(targetEventName))
-            linkedEvent.Add(targetEventName, false);
-        else
-            targetEvent?.Invoke();
+            return false;
 
-        return linkedEvent[targetEventName];
+        if (linkedEvent[targetEventName])
+        {
+            targetEvent?.Invoke();
+            return true;
+        }
+        return false;
+    }
+
+    public static void NewEvent(string targetEventName, bool isCompleted = false)
+    {
+        if (!linkedEvent.ContainsKey(targetEventName))
+            linkedEvent.Add(targetEventName, isCompleted);
+        else
+            linkedEvent[targetEventName] = isCompleted;
     }
 
     public static void LinkerClear() => linkedEvent.Clear();
