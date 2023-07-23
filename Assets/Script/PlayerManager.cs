@@ -41,6 +41,7 @@ public class PlayerManager : MovingCharacter
     // Start is called before the first frame update
     private void Awake()
     {
+        GameEventLinker.LinkerClear();
         if(instance == null)
         {
             DontDestroyOnLoad(this.gameObject); //맵이 이동해도 캐릭터 유지
@@ -162,6 +163,7 @@ public class PlayerManager : MovingCharacter
         if (!notMove && !imgevent)
         {
             //Debug.Log(objDetection.collider);
+            //아이템 이벤트 발생
             if (objDetection.collider != null && Input.GetKeyDown(KeyCode.Z))
             {
                 //playobject = hit.collider.gameObject;
@@ -170,9 +172,8 @@ public class PlayerManager : MovingCharacter
                 imgevent = true;
                 realimg = theClue.showimage(day, objDetection.collider.gameObject);
             }
-        }
 
-                
+        }    
 
         if(imgevent)
         {

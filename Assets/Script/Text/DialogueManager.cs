@@ -13,12 +13,12 @@ public class DialogueManager : MonoBehaviour
     {
         if(instance == null)
         {
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(transform.root.gameObject);
             instance = this;
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(transform.root.gameObject);
             
         }
     }
@@ -47,8 +47,6 @@ public class DialogueManager : MonoBehaviour
                 talking= false;
         dialoguePanel.SetActive(talking);
         theOrder= FindObjectOfType<OrderManager>();
-        //dialogue=FindObjectOfType<TalkDialogue>();
-        //thePlayer=FindObjectOfType<PlayerManager>();
     }
 
     public void ShowDialogue(Dialogue dialogue)

@@ -4,8 +4,8 @@ using UnityEngine;
 using TMPro;
 
 //해금
-//GameEventLinker.IsAvailable("day2"); //day2 이벤트 등록 - 해금하는 시점 => true
-//1. 파라미터,매개변수 모두 voidGameEventLinker.IsAvailable("day2",showText); //day2 이벤트 함수() 실행
+//GameEventLinker.IsAvailable("day2"); //day2 이벤트 등록 - 해금하는 시점 => 항상 true
+//1. 파라미터,매개변수 모두 none => voidGameEventLinker.IsAvailable("day2",showText); //day2 이벤트 함수() 실행 시점
 //2. if(GameEventLinker.IsAvailable("day2"))
 public class ClueManager : MonoBehaviour
 {
@@ -38,14 +38,17 @@ public class ClueManager : MonoBehaviour
     public TextMeshProUGUI text;
     public GameObject textPanel;
     private List<string> listSentences;
-    // private int count=0;
+    private int count=0;
 
     void Start()
     {
         Instantiate(Resources.Load<GameObject>("Item_Prefab"));
         sceneitemmanager=FindObjectOfType<SceneItemManager>();
+        text=DialogueManager.instance.text;
+        textPanel=DialogueManager.instance.dialoguePanel;
         text.text= "";
         listSentences= new List<string>();
+        count=0;
     }
 
 
@@ -54,7 +57,7 @@ public class ClueManager : MonoBehaviour
         Debug.Log(_day);
         Debug.Log(scanObj);
         //이미지 로드
-        renderer.sprite=Item_Prefab.ITEM[_day][scanObj.name].img;
+        renderer.sprite=Item_Prefab.ITEM[_day-1][scanObj.name].img;
 
         if (renderer.sprite == null)
         {
@@ -64,6 +67,7 @@ public class ClueManager : MonoBehaviour
         else
         {
             //이미지 보여주기
+            renderer.gameObject.SetActive(true);
             renderer.gameObject.transform.localScale= new Vector3(150,150,1);
             renderer.gameObject.transform.position=PlayerManager.instance.transform.position;
             Debug.Log(scanObj.name);
@@ -76,7 +80,7 @@ public class ClueManager : MonoBehaviour
     public void showText(int _day,GameObject scanObj)
     {
         textPanel.SetActive(true);
-        foreach (var item in Item_Prefab.ITEM[_day][scanObj.name].description)
+        foreach (var item in Item_Prefab.ITEM[_day-1][scanObj.name].description)
         {
             listSentences.Add(item);
             Debug.Log(listSentences);
@@ -93,6 +97,7 @@ public class ClueManager : MonoBehaviour
             text.text=item;
             Debug.Log(text.text);
             yield return new WaitUntil(()=>Input.GetKeyDown(KeyCode.Space));
+            Debug.Log(count);
             //yield return new WaitForSeconds(1.2f);
         }
  
@@ -117,12 +122,17 @@ public class ClueManager : MonoBehaviour
                 renderer.gameObject.SetActive(false);
         }
             
-        if(Input.GetKeyDown(KeyCode.Escape)) //esc
+        if(Input.GetKeyDown(KeyCode.Space)) //esc
         {
-            StopAllCoroutines();
-            text.text ="";
-            listSentences.Clear();
-            textPanel.SetActive(false);
+            count++;
+            if(count==listSentences.Count)
+            {
+                StopAllCoroutines();
+                text.text ="";
+                listSentences.Clear();
+                textPanel.SetActive(false);
+            }
+            
         }
     }
 

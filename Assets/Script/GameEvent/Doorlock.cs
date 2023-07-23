@@ -50,7 +50,9 @@ public class Doorlock : MonoBehaviour
     private void OnPasswordRight()
     {
         Clear();
+        Destroy(gameObject);
         Debug.Log("right");
+        GameEventLinker.NewEvent("doorlock",true); //등록 & 2번째(true) - 해금 // 해금확인 : isavailable
     }
 
     private void OnPasswordWrong()
