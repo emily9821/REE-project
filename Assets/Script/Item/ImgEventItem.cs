@@ -8,4 +8,6 @@ public class ImgEventItem : MonoBehaviour
     public int day;
     public string[] description;
     public Sprite img;
+    public string itemname;
 }
+

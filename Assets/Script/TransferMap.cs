@@ -51,20 +51,27 @@ public class TransferMap : MonoBehaviour
             {
                 foreach(var scene in arrscenelock)
                 {
+                    if(transferMapName == "veranda")
+                        GameEventLinker.NewEvent("doorlock_veranda",false);
+                    if(transferMapName == "workspace")
+                        GameEventLinker.NewEvent("doorlock_workspace",false);
                     if(PlayerManager.day == scene._day)
                     {
                         sclock=true;
                         showtext(scene.description);
-                        if(transferMapName == "workspace" && scene._day ==1) 
+                        if(transferMapName == "veranda" && scene._day ==2)
+                        {
+                            GameEventLinker.NewEvent("doorlock_veranda",true);
+                        }
+                        if(transferMapName == "workspace" && scene._day ==2) 
                         {
                             // StartCoroutine(_doorLockcoroutine());
-                            if(GameEventLinker.IsAvailable("doorlock"))
+                            if(GameEventLinker.IsAvailable("doorlock_workspace"))
                             {
                                 sclock=false;
                                 break;
                             }
-                            Instantiate(Resources.Load<GameObject>("Door Lock"));
-                            
+                            Instantiate(Resources.Load<GameObject>("Door Lock")); 
                         }
                         break;
                     }
@@ -81,16 +88,6 @@ public class TransferMap : MonoBehaviour
         }
     }
 
-    // IEnumerator _doorLockcoroutine()
-    // {
-    //     yield return new WaitForSeconds(1.5f);
-    //     if(GameEventLinker.IsAvailable("doorlock"))
-    //     {
-    //         sclock=false;
-    //         break;
-    //     }
-    //     Instantiate(Resources.Load<GameObject>("Door Lock"));
-    // }
     public void showtext(string[] sentence)
     {
         Debug.Log(gameObject.name);
@@ -113,11 +110,6 @@ public class TransferMap : MonoBehaviour
 
     void Update()
     {
-        // if(Input.GetKeyDown(KeyCode.Space)) //esc
-        // {
-        //     StopAllCoroutines();
-        //     textPanel.SetActive(false);
-        // }
     }
 
 }
