@@ -68,6 +68,7 @@ public class EventOptionHandler : MonoBehaviour
         SetSelectionDetail(selection, options[0]);
         for (int i = 1; i < options.Length; i++)
         {
+            Debug.Log(buttonYSize); ;
             var btnClone = Instantiate(selection, new Vector2(btnOriginPos.x, initYPos - buttonYSize * i), Quaternion.identity, palette.transform);
             SetSelectionDetail(btnClone, options[i]);
             buttons.Add(btnClone);
@@ -83,7 +84,7 @@ public class EventOptionHandler : MonoBehaviour
         {
             btn.onClick.AddListener(onPlay.Invoke);
         }
-        btn.onClick.AddListener(() => Destroy(gameObject));
+        //btn.onClick.AddListener(() => Destroy(gameObject));
     }
 
     private void ShowText(string msg)
