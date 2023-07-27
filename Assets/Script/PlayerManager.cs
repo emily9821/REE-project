@@ -180,7 +180,7 @@ public class PlayerManager : MovingCharacter
             Debug.Log(realimg);
             if(realimg == 0)
                 imgevent= false;
-            else if(realimg ==1)
+            else if(realimg ==100)
             {
                 notMove=true;
                 // theClue.closeimage();

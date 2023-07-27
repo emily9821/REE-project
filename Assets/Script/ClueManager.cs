@@ -73,7 +73,7 @@ public class ClueManager : MonoBehaviour
             Debug.Log(scanObj.name);
             showText(_day, scanObj);
             isclue = false;
-            return 1;
+            return 100;
         }
     }
 
@@ -129,6 +129,7 @@ public class ClueManager : MonoBehaviour
             {
                 StopAllCoroutines();
                 text.text ="";
+                count=0;
                 listSentences.Clear();
                 textPanel.SetActive(false);
             }
