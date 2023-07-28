@@ -17,12 +17,13 @@ public class TitleManager : MonoBehaviour
 
     public void StartFirstScene()
     {
+        PlayerManager.day = 1;
         SceneManager.LoadScene(firstScene);
     }
 
     public void LoadGame()
     {
-        Progress.Load();
+        Progress.WakeUp();
     }
 
     public void ShowSetting()

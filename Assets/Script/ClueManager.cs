@@ -42,7 +42,7 @@ public class ClueManager : MonoBehaviour
 
     void Start()
     {
-        Instantiate(Resources.Load<GameObject>("Item_Prefab"));
+        //Instantiate(Resources.Load<GameObject>("Item_Prefab"));
         sceneitemmanager=FindObjectOfType<SceneItemManager>();
         text=DialogueManager.instance.text;
         textPanel=DialogueManager.instance.dialoguePanel;
@@ -54,27 +54,29 @@ public class ClueManager : MonoBehaviour
 
     public int showimage(int _day,GameObject scanObj)
     {
-        Debug.Log(_day);
-        Debug.Log(scanObj);
+        Debug.Log("Day" + _day);
+        Debug.Log("scanobj" + scanObj);
         //이미지 로드
         renderer.sprite=Item_Prefab.ITEM[_day-1][scanObj.name].img;
 
-        if (renderer.sprite == null)
+        if (renderer.sprite == null && Item_Prefab.ITEM[_day-1][scanObj.name].description == null)
         {
             isclue = false;
             return 0;
         }
-        else
+        else if (renderer.sprite != null)
         {
-            //이미지 보여주기
             renderer.gameObject.SetActive(true);
             renderer.gameObject.transform.localScale= new Vector3(150,150,1);
             renderer.gameObject.transform.position=PlayerManager.instance.transform.position;
             Debug.Log(scanObj.name);
-            showText(_day, scanObj);
-            isclue = false;
-            return 1;
         }
+    
+        showText(_day, scanObj);
+        GameEventLinker.NewEvent(Item_Prefab.ITEM[_day-1][scanObj.name].itemname,true);
+        isclue = false;
+        return 100;
+
     }
 
     public void showText(int _day,GameObject scanObj)
@@ -95,24 +97,15 @@ public class ClueManager : MonoBehaviour
         foreach (var item in listSentences)
         {
             text.text=item;
-            Debug.Log(text.text);
+            yield return null; //중첩 실행 방지
             yield return new WaitUntil(()=>Input.GetKeyDown(KeyCode.Space));
-            Debug.Log(count);
             //yield return new WaitForSeconds(1.2f);
         }
+        listSentences.Clear();
+        textPanel.SetActive(false);
  
     }
-    public void closeimage()
-    {
-        renderer.gameObject.SetActive(false);
-    }
-    // public void closetext()
-    // {
-    //     text.text ="";
-    //     count=0;
-    //     listSentences.Clear();
-    //     textPanel.SetActive(false);
-    // }
+
 
     void Update()
     {
@@ -122,19 +115,6 @@ public class ClueManager : MonoBehaviour
                 renderer.gameObject.SetActive(false);
         }
             
-        if(Input.GetKeyDown(KeyCode.Space)) //esc
-        {
-            count++;
-            if(count==listSentences.Count)
-            {
-                StopAllCoroutines();
-                text.text ="";
-                listSentences.Clear();
-                textPanel.SetActive(false);
-            }
-            
-        }
     }
-
 
 }
