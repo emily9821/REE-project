@@ -10,7 +10,7 @@ public class Progress
     {
             new string[0] {},
             new string[5] { "doorlock_workspace", "doorlock_veranda", "room1_memo", "room1_newspaper", "workspace_noneselfie" },
-            new string[8] { "doorlock_lab", "room1_pill", "room1_family", "room1_carpet", "room2_family", "room2_myth", "room2_carpet", "worspace_selfie" },
+            new string[9] { "doorlock_lab","lab_minigame" , "room1_pill", "room1_family", "room1_carpet", "room2_family", "room2_myth", "room2_carpet", "worspace_selfie" },
             new string[0] {},
             new string[0] {},
     };

@@ -5,65 +5,65 @@ using UnityEngine;
 
 public class LabMiniGame : MonoBehaviour
 {
-    // 1. ÇÊ¸§ºĞ¸® : Ä«¸Ş¶ó¿¡¼­ ÇÊ¸§À» ºĞ¸®ÇÏ¿© ÁØºñÇÑ´Ù.
-    // 2. Çö»ó : ÇÊ¸§À» ÁØºñµÈ Çö»ó¾×¿¡ ºü¸£°Ô ³Ö°í 30ÃÊ°£ ±â´Ù¸°´Ù. ÀÌÈÄ ½Å¼ÓÈ÷ Çö»ó¾×À» ¹ö¸®°í ´ÙÀ½ °úÁ¤À¸·Î ³Ñ¾î°£´Ù.
-    // 3. Á¤Âø: Á¤Âø¾×À» ºü¸£°Ô ³Ö°í 30ÃÊ°£ ±â´Ù¸°´Ù. ÀÌÈÄ ½Å¼ÓÈù Á¤Âø¾×À» ¹ö¸®°í ¼ö¼¼°úÁ¤À¸·Î ³Ñ¾î°£´Ù.
-    // 4. ¼ö¼¼: Èå¸£´Â ¹°¿¡ ¼ö¼¼ÇÑ´Ù.
-    // 5. °ÇÁ¶: ÇÊ¸§À» Áı°Ô·Î Áı¾î °ÇÁ¶½ÃÅ²´Ù.
+    // 1. ï¿½Ê¸ï¿½ï¿½Ğ¸ï¿½ : Ä«ï¿½Ş¶ó¿¡¼ï¿½ ï¿½Ê¸ï¿½ï¿½ï¿½ ï¿½Ğ¸ï¿½ï¿½Ï¿ï¿½ ï¿½Øºï¿½ï¿½Ñ´ï¿½.
+    // 2. ï¿½ï¿½ï¿½ï¿½ : ï¿½Ê¸ï¿½ï¿½ï¿½ ï¿½Øºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½×¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ 30ï¿½Ê°ï¿½ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½Å¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°£ï¿½ï¿½.
+    // 3. ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ 30ï¿½Ê°ï¿½ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½Å¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°£ï¿½ï¿½.
+    // 4. ï¿½ï¿½ï¿½ï¿½: ï¿½å¸£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+    // 5. ï¿½ï¿½ï¿½ï¿½: ï¿½Ê¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å²ï¿½ï¿½.
 
-    // Ã¥»ó / ÇÊ¸§ - ÇÊ¸§À» È¹µæÇÏ¿´´Ù.
-    // Ã¥Àå ¿ìÃø/ Çö»ó¾×, Á¤Âø¾× - Çö»ó¾×À» È¹µæÇß´Ù Á¤Âø¾×À» È¹µæÇß´Ù.
-    // ½ÌÅ©´ë / ºñÄ¿ (¾×Ã¼ µû¸£´Â ¼Ò¸®) - Çö»óÇÒ±î? / Á¤ÂøÇÒ±î? (¼±ÅÃÁö)
-    // ½ÌÅ©´ë ¿Ş / ÀÚµ¿ ¼ö¼¼(¹°¼Ò¸®)
-    // Ã¥»ó, ÃÊ·Ï¸ÅÆ® - °ÇÁ¶ÇÒ±î? (¼±ÅÃÁö)
+    // Ã¥ï¿½ï¿½ / ï¿½Ê¸ï¿½ - ï¿½Ê¸ï¿½ï¿½ï¿½ È¹ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½.
+    // Ã¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½/ ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¹ï¿½ï¿½ï¿½ß´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¹ï¿½ï¿½ï¿½ß´ï¿½.
+    // ï¿½ï¿½Å©ï¿½ï¿½ / ï¿½ï¿½Ä¿ (ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½) - ï¿½ï¿½ï¿½ï¿½ï¿½Ò±ï¿½? / ï¿½ï¿½ï¿½ï¿½ï¿½Ò±ï¿½? (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+    // ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ / ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½Ò¸ï¿½)
+    // Ã¥ï¿½ï¿½, ï¿½Ê·Ï¸ï¿½Æ® - ï¿½ï¿½ï¿½ï¿½ï¿½Ò±ï¿½? (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 
-    // -> ÄÆ¾À(ºñ¹Ğ¹øÈ£ »çÁø); 1972
-    public LabPlayerDetector[] missions;
+    // -> ï¿½Æ¾ï¿½(ï¿½ï¿½Ğ¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½); 1972
+    public LabPlayerDetector[] missions; //ë¯¸ì…˜ë“¤ ëª¨ìŒ
     public GameObject password;
     public string currentMissionName { get; private set; }
-    public GameObject messageBox;
+    public GameObject messageBox; //ì„¤ëª…ì°½ íŒë„¬
     public TMP_Text messageText;
-    private List<string> required = new List<string>();
+    private List<string> required = new List<string>(); //ë¯¸ì…˜ ìˆœì„œ ë¦¬ìŠ¤íŠ¸
     private List<string> triggeredMissions = new List<string>();
-    private int currentMission;
+    private int currentMission; //í˜„ì¬ ë¯¸ì…˜ ë‹¨ê³„
 
     void Start()
     {
         currentMission = 0;
         for (int i = 0; i < missions.Length; i++)
         {
-            required.Add(missions[i].mission);
-            missions[i].SetLabMiniGame(this);
+            required.Add(missions[i].mission);  //ë¯¸ì…˜ ìˆœì„œ ì •ë ¬
+            missions[i].SetLabMiniGame(this); //ë¯¸ì…˜ ì „ë‹¬
         }
     }
 
     public void EnterMission(string missionName)
     {
-        triggeredMissions.Insert(0, missionName);
-        currentMissionName = triggeredMissions[0];
+        triggeredMissions.Insert(0, missionName); //ë°œìƒí•œ ë¯¸ì…˜ ì‚½ì…
+        currentMissionName = triggeredMissions[0]; //í˜„ì¬ ë¯¸ì…˜ì— ì „ë‹¬
     }
 
     public void ExitMission(string missionName)
     {
-        triggeredMissions.Remove(missionName);
-        if (triggeredMissions.Count > 0)
-            currentMissionName = triggeredMissions[0];
+        triggeredMissions.Remove(missionName); //ë°œìƒí•œ ë¯¸ì…˜ ì‚­ì œ
+        if (triggeredMissions.Count > 0) //ì•„ì§ ë¯¸ì…˜ì´ ë‚¨ì•„ìˆì„ ë•Œ
+            currentMissionName = triggeredMissions[0]; //í˜„ì¬ ë¯¸ì…˜ ìˆ˜í–‰
         else
             currentMissionName = null;
     }
 
     public bool IsBreakabe(string missionName)
     {
-        return currentMission == required.IndexOf(missionName);
+        return currentMission == required.IndexOf(missionName); //ë¯¸ì…˜ ìˆœì„œ ë°˜í™˜
     }
 
     public void StageSuccess()
     {
         currentMission++;
-        if (currentMission >= required.Count)
+        if (currentMission >= required.Count) //ì „ì²´ ë¯¸ì…˜ ì™„ë£Œ
         {
-            password.SetActive(true);
-            StartCoroutine(OnSpacePressed());
+            password.SetActive(true); //ë¹„ë²ˆ (ë¯¸ì…˜ ê²°ê³¼) ì¶œë ¥
+            StartCoroutine(OnSpacePressed()); //ìŠ¤í˜ì´ìŠ¤ë°” ëˆ„ë¥´ë©´ ê²°ê³¼ì°½ ë‹«í˜
         }
     }
 
@@ -74,5 +74,6 @@ public class LabMiniGame : MonoBehaviour
 
         password.SetActive(false);
         Destroy(gameObject);
+        GameEventLinker.NewEvent("lab_minigame",true);
     }
 }

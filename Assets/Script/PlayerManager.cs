@@ -29,6 +29,7 @@ public class PlayerManager : MovingCharacter
 
     public GameObject playobject;
     public static int day=1; //현재 day
+    private static bool isminigaming=false;
 
     public Vector2 start;
     public Vector2 end;
@@ -38,7 +39,6 @@ public class PlayerManager : MovingCharacter
     private float[] dirs = new float[2];
     
 
-    // Start is called before the first frame update
     private void Awake()
     {
         GameEventLinker.LinkerClear();
@@ -145,7 +145,7 @@ public class PlayerManager : MovingCharacter
 
     // Update is called once per frame
     void Update() //매 프레임마다 함수를 실행
-    {     //위치 입력 받기 , 레이캐스트]
+    {     //위치 입력 받기 , 레이캐스트
         var objDetection = Physics2D.Linecast(transform.position, transform.position + normalizedDir * 50f, layerMask);
         Debug.DrawLine(transform.position, transform.position + normalizedDir * 100, Color.blue);
         //Debug.Log(normalizedDir);
@@ -189,9 +189,25 @@ public class PlayerManager : MovingCharacter
             imgevent= false;
             realimg = 0;
         }
+
+        //workspace 미니게임 실행
+        if(currentMapName == "workspace" && day ==1 && !isminigaming )
+        {
+            isminigaming=true;
+            if(!GameEventLinker.IsAvailable("lab_minigame"))
+            {
+                Debug.Log("start minigame");
+                StartCoroutine(minigame());
+            }
+        }
     }
 
-
+IEnumerator minigame()
+{
+    Instantiate(Resources.Load<GameObject>("LabMinigame"));
+    yield return new WaitUntil(()=>GameEventLinker.IsAvailable("lab_minigame"));
+    isminigaming=false;
+}
     private void SetDir(Vector3 dir)
     {
         if (dir.magnitude <= 0.1f)

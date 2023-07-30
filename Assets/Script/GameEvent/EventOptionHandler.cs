@@ -16,8 +16,8 @@ public class EventOptionHandler : MonoBehaviour
     public float buttonYSize;
 
     private TMP_Text words;
-    private Canvas palette;
-    private Button selection;
+    private Canvas palette; //캔버스
+    private Button selection; //선택지 버튼
     private List<Button> buttons;
     private Vector2 btnOriginPos;
     private readonly WaitForSeconds waitTimeWhenWrong = new WaitForSeconds(2.5f);
@@ -29,22 +29,22 @@ public class EventOptionHandler : MonoBehaviour
         btnOriginPos = selection.transform.position;
     }
 
-    public static EventOptionHandler Call(string monologueName)
+    public static EventOptionHandler Call(string monologueName) //생성자 재정의..?
     {
-        var monologues = FindObjectsByType<EventOptionHandler>(FindObjectsSortMode.None);
+        var monologues = FindObjectsByType<EventOptionHandler>(FindObjectsSortMode.None); //개체를 정렬하지 않고 type 객체 전체 검색
         foreach (var item in monologues)
         {
-            if (item.name == monologueName)
+            if (item.name == monologueName) //미션이름이 일치한다면 선택지 보여줌
             {
                 item.Show();
                 return item;
             }
         }
-        var monologueInAsset = Resources.Load<EventOptionHandler>("MonologueEvents/" + monologueName);
+        var monologueInAsset = Resources.Load<EventOptionHandler>("MonologueEvents/" + monologueName); //해당 미션 로드
         if (monologueInAsset == null)
             return null;
 
-        monologueInAsset = Instantiate(monologueInAsset);
+        monologueInAsset = Instantiate(monologueInAsset);//미션 보여줌
         monologueInAsset.Show();
         return monologueInAsset;
     }
@@ -58,7 +58,7 @@ public class EventOptionHandler : MonoBehaviour
         }
     }
 
-    public void Show()
+    public void Show() //선택지 보여줌
     {
         buttons = new List<Button>();
         float initYPos = buttonYSize * (options.Length - 1) / 2f + btnOriginPos.y;
@@ -112,6 +112,6 @@ public class EventOptionHandler : MonoBehaviour
 [System.Serializable]
 public class Option
 {
-    public string response;
-    public bool isRightAnswer = false;
+    public string response; //옵션 내용 
+    public bool isRightAnswer = false; //option 응답 y/n
 }

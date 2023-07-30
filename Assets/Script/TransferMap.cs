@@ -14,7 +14,7 @@ public class TransferMap : MonoBehaviour
     private FadeManager theFade;
     private OrderManager theOrder;
     public bool flag;
-    public bool sclock;
+    public bool onlock;
     int day;
 
     //text
@@ -42,50 +42,66 @@ public class TransferMap : MonoBehaviour
     {
         if(collision.gameObject.name == "Player" )
         {
-            if(!sclock && arrscenelock==null)
+            if(!onlock && arrscenelock==null) //해금 조건이 없는 경우
             {
-                thePlayer.currentMapName = transferMapName;
-                SceneManager.LoadScene(transferMapName);
+                /* thePlayer.currentMapName = transferMapName;
+                SceneManager.LoadScene(transferMapName); */
             }
             else
             {
                 foreach(var scene in arrscenelock)
                 {
-                    if(transferMapName == "veranda")
-                        GameEventLinker.NewEvent("doorlock_veranda",false);
-                    if(transferMapName == "workspace")
-                        GameEventLinker.NewEvent("doorlock_workspace",false);
-                    if(PlayerManager.day == scene._day)
+                    if(PlayerManager.day == scene._day) // 해금 조건이 day와 일치할 경우
                     {
-                        sclock=true;
-                        showtext(scene.description);
+                        onlock=true;
                         if(transferMapName == "veranda" && scene._day ==2)
                         {
-                            GameEventLinker.NewEvent("doorlock_veranda",true);
-                        }
-                        if(transferMapName == "workspace" && scene._day ==2) 
-                        {
-                            // StartCoroutine(_doorLockcoroutine());
-                            if(GameEventLinker.IsAvailable("doorlock_workspace"))
+                            if(!GameEventLinker.IsAvailable("doorlock_workspace"))
                             {
-                                sclock=false;
+                                showtext(scene.description);
+                                GameEventLinker.NewEvent("doorlock_veranda",true);
                                 break;
                             }
-                            Instantiate(Resources.Load<GameObject>("Door Lock")); 
+                            onlock=false;
+                        }
+                        if(transferMapName == "workspace" && scene._day ==1)
+                        {
+                            if(!GameEventLinker.IsAvailable("doorlock_workspace"))
+                            {
+                                showtext(scene.description);
+                                StartCoroutine(_doorLockcoroutine());
+                                break;
+                            } 
+                            onlock=false;
+                        }
+                        else
+                        {
+                            showtext(scene.description);
+                            onlock=true;
                         }
                         break;
-                    }
-                    else
-                        sclock=false;
+                    }       
                 }
             }
             
-            if(!sclock )
+            if(!onlock ) //해금되면 입장
             {
+                Debug.Log("transfer");
                 thePlayer.currentMapName = transferMapName;
                 SceneManager.LoadScene(transferMapName);
             }
         }
+    }
+
+    IEnumerator _doorLockcoroutine()
+    {
+        Instantiate(Resources.Load<GameObject>("Door Lock"));
+        yield return new WaitUntil(()=>GameEventLinker.IsAvailable("doorlock_workspace"));
+        //onlock=false;
+        Debug.Log("ok");
+        thePlayer.currentMapName = transferMapName;
+        SceneManager.LoadScene(transferMapName);
+        //Instantiate(Resources.Load<GameObject>("LabMinigame"));
     }
 
     public void showtext(string[] sentence)

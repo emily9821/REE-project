@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LabPlayerDetector : MonoBehaviour
 {
-    public string mission;
-    public string[] indicates;
+    public string mission; //미션 이름
+    public string[] indicates; //미션 설명
 
     private LabMiniGame labMiniGame;
     private bool isRunning = false;
@@ -14,12 +14,12 @@ public class LabPlayerDetector : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (labMiniGame.currentMissionName == null)
+            if (labMiniGame.currentMissionName == null) //미션이 없을때 
                 return;
-            if (labMiniGame.currentMissionName != mission)
+            if (labMiniGame.currentMissionName != mission) //미션이 일치하지 않을때 
                 return;
 
-            if (labMiniGame.IsBreakabe(mission) && !isRunning)
+            if (labMiniGame.IsBreakabe(mission) && !isRunning) //미션 일치 & 아직 미완료 경우
             {
                 StartCoroutine(MissionIndicate());
             }
@@ -28,25 +28,25 @@ public class LabPlayerDetector : MonoBehaviour
 
     IEnumerator MissionIndicate()
     {
-        isRunning = true;
-        labMiniGame.messageBox.SetActive(true);
-        for (int i = 0; i < indicates.Length; i++)
+        isRunning = true;//미션 수행중
+        labMiniGame.messageBox.SetActive(true); //설명창 true
+        for (int i = 0; i < indicates.Length; i++) //설명 출력
         {
             labMiniGame.messageText.text = indicates[i];
             yield return null;
-            if (i == indicates.Length - 1)
+            if (i == indicates.Length - 1) //설명 끝날때
                 yield return new WaitForSeconds(2.5f);
-            else
+            else//설명 중 스페이스바로 넘김
                 yield return new WaitUntil(()=>Input.GetKeyDown(KeyCode.Space));
         }
-        labMiniGame.messageBox.SetActive(false);
-        isRunning = false;
+        labMiniGame.messageBox.SetActive(false); //설명 닫음
+        isRunning = false; //미션 끝
 
-        var options = EventOptionHandler.Call(mission);
-        options.AddEvent(() => Destroy(options.gameObject));
-        yield return new WaitUntil(() => options == null);
+        var options = EventOptionHandler.Call(mission); //미션 불러옴
+        options.AddEvent(() => Destroy(options.gameObject)); //미션 닫음
+        yield return new WaitUntil(() => options == null); //미션 끝날 때 까지
 
-        labMiniGame.StageSuccess();
+        labMiniGame.StageSuccess(); //미션 결과
     }
 
     public void SetLabMiniGame(LabMiniGame lab)
@@ -54,7 +54,7 @@ public class LabPlayerDetector : MonoBehaviour
         labMiniGame = lab;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //미션 발생 시작
     {
         if (collision.CompareTag("Player"))
         {
@@ -62,7 +62,7 @@ public class LabPlayerDetector : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision) //미션 완료 후 나올때
     {
         if (collision.CompareTag("Player"))
         {
