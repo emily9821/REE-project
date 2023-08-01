@@ -11,6 +11,10 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             if (instance == null)
             {
                 instance = FindObjectOfType<T>();
+                if (instance == null )
+                {
+                    instance = GameObject.Instantiate(Resources.LoadAll<T>("")[0]);
+                }
             }
 
             return instance;

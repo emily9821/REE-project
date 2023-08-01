@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Doorlock_lab : MonoBehaviour
 {
-    //private int[] answer = new int[4] { 0, 6, 0, 6 };
+    public Transform pswTextStorage;
+    public TMP_Text[] pwdText;
+
     private int[] answer_workspace = new int[4] { 0, 6, 0, 6 };
     private int[] answer_lab = new int[4] { 1, 9, 7, 2 };
     private int[] password = new int[4];
+    private readonly WaitForSeconds waitForClear = new WaitForSeconds(1f);
+    private bool isPwdEnabled = true;
 
     void Start()
     {
@@ -16,11 +21,15 @@ public class Doorlock_lab : MonoBehaviour
 
     public void PressPasswordButton(int i)
     {
+        if (!isPwdEnabled)
+            return;
+
         for (int j = 0; j < password.Length; j++)
         {
             if (password[j] == -1)
             {
                 password[j] = i;
+                pwdText[j].text = i.ToString();
                 if (j != 3)
                     return;
             }
@@ -38,9 +47,11 @@ public class Doorlock_lab : MonoBehaviour
 
     public void Clear()
     {
-        for(int j = 0;j < password.Length; j++)
+        isPwdEnabled = true;
+        for (int j = 0;j < password.Length; j++)
         {
             password[j] = -1;
+            pwdText[j].text = "";
         }
     }
 
@@ -50,15 +61,19 @@ public class Doorlock_lab : MonoBehaviour
         {
             if (password[i] != answer[i])
             {
-                OnPasswordWrong();
+                StartCoroutine(OnPasswordWrong());
                 return;
             }
         }
-        OnPasswordRight(answer);
+        StartCoroutine(OnPasswordRight(answer));
     }
 
-    private void OnPasswordRight(int[] answer)
+    IEnumerator OnPasswordRight(int[] answer)
     {
+        isPwdEnabled = false;
+        SFX.Play(SoundEffect.doorlock_open);
+        yield return waitForClear;
+
         Clear();
         Destroy(gameObject);
         Debug.Log("right");
@@ -68,8 +83,23 @@ public class Doorlock_lab : MonoBehaviour
             GameEventLinker.NewEvent("doorlock_workspace",true);
     }
 
-    private void OnPasswordWrong()
+    IEnumerator OnPasswordWrong()
     {
+        isPwdEnabled = false;
+
+        var originPos = pswTextStorage.position;
+        float shakeTime = 0.5f;
+        int power = 5;
+        int isLeft = -1;
+        while(shakeTime >= 0f)
+        {
+            power *= isLeft;
+            pswTextStorage.position = originPos + power * Vector3.right;
+            yield return new WaitForSeconds(0.04f);
+            shakeTime -= 0.04f;
+        }
+        pswTextStorage.position = originPos;
+        yield return waitForClear;
         Clear();
         Debug.Log("wrong");
     }

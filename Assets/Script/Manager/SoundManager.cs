@@ -40,6 +40,7 @@ public enum SoundEffect
     test1,
     test2, 
     test3,
+    doorlock_open,
 }
 
 public enum BackgroundMusic
