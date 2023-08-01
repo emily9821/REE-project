@@ -24,6 +24,7 @@ public class Doorlock_lab : MonoBehaviour
         if (!isPwdEnabled)
             return;
 
+        SFX.Play(SoundEffect.doorlick_button);
         for (int j = 0; j < password.Length; j++)
         {
             if (password[j] == -1)
@@ -76,7 +77,7 @@ public class Doorlock_lab : MonoBehaviour
 
         Clear();
         Destroy(gameObject);
-        Debug.Log("right");
+
         if(answer==answer_lab)
             GameEventLinker.NewEvent("doorlock_lab",true); //등록 & 2번째(true) - 해금 // 해금확인 : isavailable
         if(answer==answer_workspace)
@@ -86,7 +87,7 @@ public class Doorlock_lab : MonoBehaviour
     IEnumerator OnPasswordWrong()
     {
         isPwdEnabled = false;
-
+        SFX.Play(SoundEffect.doorlock_wrong);
         var originPos = pswTextStorage.position;
         float shakeTime = 0.5f;
         int power = 5;

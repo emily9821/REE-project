@@ -142,5 +142,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundClips:
-  - sound: 3
+  - sound: 0
     clip: {fileID: 8300000, guid: ad45d1a4d7f22614188eefdb09e8bc00, type: 3}
+  - sound: 1
+    clip: {fileID: 8300000, guid: 898a8d3a66cee314e9de24d9b421db5a, type: 3}
+  - sound: 2
+    clip: {fileID: 8300000, guid: 55ff212533a4489438879ec04c834ad0, type: 3}
+  - sound: 3
+    clip: {fileID: 8300000, guid: f290d91f7ce7ced41b4ed361a2be8a8c, type: 3}
+  - sound: 4
+    clip: {fileID: 8300000, guid: 0fa1032c0251c4149b6ae36c9bfcb707, type: 3}
+  - sound: 5
+    clip: {fileID: 8300000, guid: 29e7b33360c01454aaa50a00f05063e6, type: 3}
+  - sound: 6
+    clip: {fileID: 8300000, guid: 9454bcd822a7fae44a5a26c2134191b9, type: 3}
+  - sound: 7
+    clip: {fileID: 8300000, guid: 32fd267a85b56a5489125ce0044631c9, type: 3}
+  - sound: 8
+    clip: {fileID: 8300000, guid: 92e6d102d86e59f428c2224e06637287, type: 3}
+  - sound: 9
+    clip: {fileID: 8300000, guid: 32619994ec666cb4e9ed1da15a730d55, type: 3}

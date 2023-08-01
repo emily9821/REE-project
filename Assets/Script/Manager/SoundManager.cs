@@ -24,7 +24,7 @@ public abstract class SoundManager<T, TEnum>: Singleton<T> where T : MonoBehavio
             return;
         }
         audioSource.clip = clip;
-        audioSource.Play();
+        audioSource.PlayOneShot(clip);
     }
 }
 
@@ -37,10 +37,16 @@ public struct SoundClip<TEnum> where TEnum : Enum
 
 public enum SoundEffect
 {
-    test1,
-    test2, 
-    test3,
     doorlock_open,
+    doorlock_wrong,
+    phone_call_take_on,
+    phone_call_take_off,
+    phone_call_ringing,
+    car_approach,
+    footstep,
+    item,
+    doorlick_button,
+    light_switch,
 }
 
 public enum BackgroundMusic

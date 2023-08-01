@@ -9,6 +9,7 @@ public class RedlightEvent : MonoBehaviour
     public SpriteRenderer renderer;
     public Sprite img;
     public Color color;
+    private EventOptionHandler redLightEvent;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.name == "Player")
@@ -23,10 +24,11 @@ public class RedlightEvent : MonoBehaviour
 
     IEnumerator redlight()
     {
-        var options= EventOptionHandler.Call("redlight");
-        options.gameObject.SetActive(true);
-        options.AddEvent(() => options.gameObject.SetActive(false));
-        yield return new WaitUntil(() => options == null);
+        if (redLightEvent == null)
+            redLightEvent = EventOptionHandler.Call("redlight");
+        redLightEvent.gameObject.SetActive(true);
+        redLightEvent.AddEvent(() => redLightEvent.gameObject.SetActive(false));
+        yield return null;
         
     }
 
