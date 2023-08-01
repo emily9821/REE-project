@@ -74,6 +74,6 @@ public class LabMiniGame : MonoBehaviour
 
         password.SetActive(false);
         Destroy(gameObject);
-        GameEventLinker.NewEvent("lab_minigame",true);
+        GameEventLinker.NewEvent("workspace_minigame",true);
     }
 }

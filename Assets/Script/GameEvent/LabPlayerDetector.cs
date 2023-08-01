@@ -43,7 +43,7 @@ public class LabPlayerDetector : MonoBehaviour
         isRunning = false; //미션 끝
 
         var options = EventOptionHandler.Call(mission); //미션 불러옴
-        options.AddEvent(() => Destroy(options.gameObject)); //미션 닫음
+        options.AddEvent(() => Destroy(options.gameObject)); //미션 닫음 추가
         yield return new WaitUntil(() => options == null); //미션 끝날 때 까지
 
         labMiniGame.StageSuccess(); //미션 결과

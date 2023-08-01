@@ -29,6 +29,7 @@ public class PlayerManager : MovingCharacter
 
     public GameObject playobject;
     public static int day=1; //현재 day
+    public int enditemcount=0; //4일차 lab 미니게임 아이템 수집 개수
     private static bool isminigaming=false;
 
     public Vector2 start;
@@ -194,7 +195,7 @@ public class PlayerManager : MovingCharacter
         if(currentMapName == "workspace" && day ==1 && !isminigaming )
         {
             isminigaming=true;
-            if(!GameEventLinker.IsAvailable("lab_minigame"))
+            if(!GameEventLinker.IsAvailable("workspace_minigame"))
             {
                 Debug.Log("start minigame");
                 StartCoroutine(minigame());

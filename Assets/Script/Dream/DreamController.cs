@@ -8,13 +8,17 @@ public class DreamController : MonoBehaviour
     public static DreamController instance; //생성
 
     public Dream[] dreams; //day
-
+    //private SleepController sleepController;
     public SpriteRenderer renderer;
     public TextMeshProUGUI text;
+    public GameObject textPanel;
 
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("daydream");
+        text=DialogueManager.instance.text;
+        textPanel=DialogueManager.instance.dialoguePanel;
         text.text="";
         ShowAllDreams();
     }
@@ -26,6 +30,7 @@ public class DreamController : MonoBehaviour
 
     IEnumerator ShowDream()
     {
+        textPanel.SetActive(true);
         foreach (var dream in dreams)
         {
             renderer.sprite=dream.img;
@@ -38,12 +43,17 @@ public class DreamController : MonoBehaviour
                 yield return new WaitForSeconds(dream.waitTime);
             }
         }
+        text.text="";
+        textPanel.SetActive(false);
+        Debug.Log("Dream"+(PlayerManager.day-1));
+        GameEventLinker.NewEvent("Dream"+(PlayerManager.day-1),true);
     }
 }
 
 [System.Serializable]
 public class Dream
 {
+    public int dreamday;
     public string dreamName;
     public string[] detailDescription;
     public float waitTime;

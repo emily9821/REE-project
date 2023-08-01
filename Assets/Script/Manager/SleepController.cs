@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(BoxCollider2D))] //BoxCollider2D 자동 추가
 public class SleepController : MonoBehaviour
 {
     public int stageDay;
@@ -25,8 +25,21 @@ public class SleepController : MonoBehaviour
     IEnumerator Sleeping()
     {
         isSleeping = true;
-        yield return new WaitForSeconds(sleepTime);
+        PlayerManager.instance.notMove=true;
+        startdream();
+        yield return new WaitUntil(()=>GameEventLinker.IsAvailable("Dream"+stageDay));
+        //yield return new WaitForSeconds(sleepTime);
+        PlayerManager.instance.notMove=false;
         Progress.WakeUp();
+    }
+
+    public void startdream()
+    {
+        if(!GameEventLinker.IsAvailable("Dream"+stageDay))
+        {
+            Debug.Log("dream");
+            Instantiate(Resources.Load<GameObject>("Dream/"+stageDay));
+        }
     }
 
     public enum Type
@@ -37,8 +50,10 @@ public class SleepController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Input.GetKeyDown(KeyCode.Space) && type == Type.Sleep && stageDay == PlayerManager.day)
+        if (Input.GetKeyDown(KeyCode.Space) && type == Type.Sleep && stageDay == PlayerManager.day) //collision.gameObject.name == "Player" && 
         {
+            Debug.Log(type);
+            Debug.Log(stageDay);
             if (isSleeping)
                 return;
 

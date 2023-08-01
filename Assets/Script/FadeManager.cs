@@ -9,8 +9,8 @@ public class FadeManager : MonoBehaviour
     private Color color;
 
     private static FadeManager I 
-    {
-        get
+    { //프로퍼티
+        get 
         {
             if (_fadeManager == null)
             {
@@ -42,10 +42,10 @@ public class FadeManager : MonoBehaviour
     }
     IEnumerator FadeOutCoroutine(float _speed)
     {
-        color.a = 0f;
+        color.a = 0f; //투명도 0
         //color = screen.color;
 
-        while(color.a < 1f)
+        while(color.a < 1f) //투명도 증가
         {
             color.a += _speed;
             screen.color = color;
@@ -61,10 +61,10 @@ public class FadeManager : MonoBehaviour
 
     IEnumerator FadeInCoroutine(float _speed)
     {
-        color.a = 1f;
+        color.a = 1f; //투명도 100
         //color = screen.color;
 
-        while(color.a > 0f)
+        while(color.a > 0f) //투명도 감소
         {
             color.a -= _speed;
             screen.color = color;
@@ -83,7 +83,7 @@ public class FadeManager : MonoBehaviour
         color.a = 0f;
         color = screen.color;
 
-        while(color.a <1f)
+        while(color.a <1f) //투명도 감소
         {
             color.a += _speed;
             screen.color = color;
@@ -109,4 +109,18 @@ public class FadeManager : MonoBehaviour
             yield return waitTime;
         }
     }
+
+    public void redIn()
+    {
+        color = screen.color;
+        color.a= 0.3f;
+        // StopAllCoroutines();
+        // StartCoroutine(redInCoroutine(_speed));
+    }
+
+    // IEnumerator redInCoroutine(float _speed)
+    // {
+    //     color = screen.color;
+    //     color.a= 0.3f;
+    // }
 }

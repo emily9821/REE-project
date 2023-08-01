@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.Events; //UnityEvent 사용
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class EventOptionHandler : MonoBehaviour
 {
-    public Option[] options;
+    public Option[] options; //선택지들
     public UnityEvent onPlay;
     [Range(50f, 800f)]
     public float buttonYSize;
@@ -18,14 +18,14 @@ public class EventOptionHandler : MonoBehaviour
     private TMP_Text words;
     private Canvas palette; //캔버스
     private Button selection; //선택지 버튼
-    private List<Button> buttons;
+    private List<Button> buttons; //버튼
     private Vector2 btnOriginPos;
     private readonly WaitForSeconds waitTimeWhenWrong = new WaitForSeconds(2.5f);
 
     private void Awake()
     {
         palette = GetComponentInChildren<Canvas>();
-        selection = palette.GetComponentInChildren<Button>(true);
+        selection = palette.GetComponentInChildren<Button>(true); //palette 자식으로 selection 생성 캔버스안에 버튼 생성
         btnOriginPos = selection.transform.position;
     }
 
@@ -49,7 +49,7 @@ public class EventOptionHandler : MonoBehaviour
         return monologueInAsset;
     }
 
-    public void AddEvent(Action onRight)
+    public void AddEvent(Action onRight) //함수 추가
     {
         for (int i = 0; i < buttons.Count; i++)
         {
@@ -63,24 +63,24 @@ public class EventOptionHandler : MonoBehaviour
         buttons = new List<Button>();
         float initYPos = buttonYSize * (options.Length - 1) / 2f + btnOriginPos.y;
         selection.transform.position = new Vector2(btnOriginPos.x, initYPos);
-        buttons.Add(selection);
+        buttons.Add(selection); //버튼 생성
 
-        SetSelectionDetail(selection, options[0]);
+        SetSelectionDetail(selection, options[0]); //0번째 선택지 버튼 설정
         for (int i = 1; i < options.Length; i++)
         {
             Debug.Log(buttonYSize); ;
-            var btnClone = Instantiate(selection, new Vector2(btnOriginPos.x, initYPos - buttonYSize * i), Quaternion.identity, palette.transform);
-            SetSelectionDetail(btnClone, options[i]);
-            buttons.Add(btnClone);
+            var btnClone = Instantiate(selection, new Vector2(btnOriginPos.x, initYPos - buttonYSize * i), Quaternion.identity, palette.transform); 
+            SetSelectionDetail(btnClone, options[i]); //다음 선택지 버튼 설정
+            buttons.Add(btnClone); //다음 선택지 버튼 생성
         }
 
-        buttons.ForEach(button => button.gameObject.SetActive(true));
+        buttons.ForEach(button => button.gameObject.SetActive(true)); //모든 버튼 true
     }
 
     private void SetSelectionDetail(Button btn, Option option)
     {
-        btn.GetComponentInChildren<TMP_Text>().text = option.response;
-        if(option.isRightAnswer)
+        btn.GetComponentInChildren<TMP_Text>().text = option.response; //선택지 내용 설정
+        if(option.isRightAnswer) //정답 선택지인 경우 해당 함수 실행 (함수 설정)
         {
             btn.onClick.AddListener(onPlay.Invoke);
         }
