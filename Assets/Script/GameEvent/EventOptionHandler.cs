@@ -30,8 +30,8 @@ public class EventOptionHandler : MonoBehaviour
     }
 
     public static EventOptionHandler Call(string monologueName) //생성자 재정의..?
-    {
-        var monologues = FindObjectsByType<EventOptionHandler>(FindObjectsSortMode.None); //개체를 정렬하지 않고 type 객체 전체 검색
+    {    
+        var monologues = FindObjectsByType<EventOptionHandler>(FindObjectsInactive.Include, FindObjectsSortMode.None); //개체를 정렬하지 않고 type 객체 전체 검색
         foreach (var item in monologues)
         {
             if (item.name == monologueName) //미션이름이 일치한다면 선택지 보여줌
@@ -107,7 +107,14 @@ public class EventOptionHandler : MonoBehaviour
         SetMainText("");
         OnOffAllButton(true);
     }
+
+    void OnDestroy()
+    {
+        Debug.Log("a");
+    }
 }
+
+
 
 [System.Serializable]
 public class Option

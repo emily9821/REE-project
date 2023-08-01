@@ -39,7 +39,7 @@ public class LabEndingGame : MonoBehaviour
 
     IEnumerator Endgame()
     {
-        var options= EventOptionHandler.Call("redlight");
+        var options= EventOptionHandler.Call("medi_selection");
         options.AddEvent(() => Destroy(options.gameObject));
         yield return new WaitUntil(() => options == null);
         text.text="";
