@@ -3045,6 +3045,7 @@ MonoBehaviour:
   realimg: 0
   playobject: {fileID: 0}
   enditemcount: 0
+  ending: sad
   start: {x: 0, y: 0}
   end: {x: 0, y: 0}
 --- !u!114 &1465714565

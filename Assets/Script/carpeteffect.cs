@@ -29,15 +29,5 @@ public class carpeteffect : MonoBehaviour
         yield return new WaitUntil(()=>GameEventLinker.IsAvailable("doorlock_lab"));
         gameObject.SetActive(false);
         transferlab.SetActive(true);
-        // var list = GameObject.FindObjectsByType<TransferMap>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-        // for (int i = 0; i < list.Length; i++)
-        // {
-        //     if (list[i].gameObject.name == "Transfer_lab")
-        //     {
-        //         list[i].gameObject.SetActive(true);
-        //         break;
-        //     }
-        // }
-
     }
 }

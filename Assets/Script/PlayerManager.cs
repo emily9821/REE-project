@@ -30,6 +30,8 @@ public class PlayerManager : MovingCharacter
     public GameObject playobject;
     public static int day=1; //현재 day
     public int enditemcount=0; //4일차 lab 미니게임 아이템 수집 개수
+    private int[] enditem=new int[4]{0,0,0,0};
+    public string ending="sad";
     private static bool isminigaming=false;
 
     public Vector2 start;
@@ -174,6 +176,31 @@ public class PlayerManager : MovingCharacter
                 realimg = theClue.showimage(day, objDetection.collider.gameObject);
             }
 
+            if(currentMapName == "lab" && objDetection.collider != null)
+            {
+                switch(objDetection.collider.gameObject.name)
+                {
+                    case "lab_log":
+                        if(enditem[0]==0)
+                            enditemcount++;
+                        break;
+                    case "lab_report1":
+                        if(enditem[1]==0)
+                            enditemcount++;
+                        break;
+                    case "computer":
+                        if(enditem[2]==0)
+                            enditemcount++;
+                        break;
+                    case "lab_report2":
+                        if(enditem[3]==0)
+                            enditemcount++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
         }    
 
         if(imgevent)
@@ -200,6 +227,12 @@ public class PlayerManager : MovingCharacter
                 Debug.Log("start minigame");
                 StartCoroutine(minigame());
             }
+        }
+
+        //lab 미니게임 아이템 획득
+        if(currentMapName == "lab")
+        {
+            
         }
     }
 

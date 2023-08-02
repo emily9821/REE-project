@@ -15,7 +15,7 @@ public class Progress
     public static string[] startScene = new string[5] { "room1", "room1", "room1", "lab", "veranda" };
     public static string[][] stageEvents = new string[5][]
     {
-            new string[0] {},
+            new string[1] {"lab_minigame" },
             new string[5] { "doorlock_workspace", "doorlock_veranda", "room1_memo", "room1_newspaper", "workspace_noneselfie" },
             new string[9] { "doorlock_lab","workspace_minigame" , "room1_pill", "room1_family", "room1_carpet", "room2_family", "room2_myth", "room2_carpet", "worspace_selfie" },
             new string[1] {"lab_minigame"},
@@ -30,7 +30,7 @@ public class Progress
 
     public static bool Sleep()
     {
-        //if (CheckDayEvents(PlayerManager.day - 1))
+        if (CheckDayEvents(PlayerManager.day - 1))
         {
             PlayerManager.day++;
             Save();
