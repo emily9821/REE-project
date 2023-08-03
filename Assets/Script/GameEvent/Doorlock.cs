@@ -103,5 +103,6 @@ public class Doorlock_lab : MonoBehaviour
         yield return waitForClear;
         Clear();
         Debug.Log("wrong");
+        Destroy(gameObject);
     }
 }
