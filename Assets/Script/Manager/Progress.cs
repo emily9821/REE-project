@@ -65,7 +65,7 @@ public class Progress
         {
             if(PlayerManager.day==1)
             {
-                if (GameEventLinker.IsAvailable(e[i])==null)
+                if (GameEventLinker.IsAvailable(e[i]))
                 {
                     Debug.Log("단서가 부족합니다.");
                     return false;

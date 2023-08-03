@@ -79,6 +79,7 @@ public class ClueManager : MonoBehaviour
 
     public void showText(int _day,GameObject scanObj)
     {
+        SFX.Play(SoundEffect.item);
         textPanel.SetActive(true);
         foreach (var item in Item_Prefab.ITEM[_day-1][scanObj.name].description)
         {
@@ -100,6 +101,7 @@ public class ClueManager : MonoBehaviour
             //yield return new WaitForSeconds(1.2f);
         }
         listSentences.Clear();
+        text.text=null;
         textPanel.SetActive(false);
  
     }

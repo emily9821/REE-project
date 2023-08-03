@@ -1192,6 +1192,7 @@ MonoBehaviour:
   dialogue:
     sentences:
     - "\uD479\uC2E0\uD479\uC2E0\uD55C \uBCF4\uAE09\uD615 \uCE68\uB300\uC774\uB2E4"
+    - "\uB0B4\uAC00 \uC7A0\uC790\uB294 \uACF3\uC774\uAD70.."
 --- !u!1 &627918327
 GameObject:
   m_ObjectHideFlags: 0
@@ -3306,11 +3307,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5546022804407563270, guid: aaffb1f10d67e5e4d9687df9baeaf596, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -352
+      value: -453
       objectReference: {fileID: 0}
     - target: {fileID: 5546022804407563270, guid: aaffb1f10d67e5e4d9687df9baeaf596, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5
+      value: -13
       objectReference: {fileID: 0}
     - target: {fileID: 5546022804407563270, guid: aaffb1f10d67e5e4d9687df9baeaf596, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3351,8 +3352,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1283146804125406637, guid: aaffb1f10d67e5e4d9687df9baeaf596, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1753852817}
   m_SourcePrefab: {fileID: 100100000, guid: aaffb1f10d67e5e4d9687df9baeaf596, type: 3}
+--- !u!1 &1753852816 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1283146804125406637, guid: aaffb1f10d67e5e4d9687df9baeaf596, type: 3}
+  m_PrefabInstance: {fileID: 1753852815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1753852817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753852816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8622ed1cae36cb541b8fdbabf46164db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageDay: 2
+  sleepTime: 2
+  type: 0
 --- !u!1 &1834642463
 GameObject:
   m_ObjectHideFlags: 0
@@ -3847,8 +3871,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -136.99626, y: -129.79439}
-  m_SizeDelta: {x: 308.0075, y: 53.1046}
+  m_AnchoredPosition: {x: -36.417, y: -132}
+  m_SizeDelta: {x: 509.1661, y: 53.1046}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!212 &3749394027764003233
 SpriteRenderer:

@@ -38,7 +38,7 @@ public class DreamController : MonoBehaviour
             renderer.sprite=dream.img;
             renderer.gameObject.transform.localScale= new Vector3(150,150,1);
             renderer.gameObject.transform.position=PlayerManager.instance.transform.position;
-            yield return new WaitForSeconds(0.1f);
+            //yield return new WaitForSeconds(0.1f);
             foreach (var _text in dream.detailDescription)
             {
                 text.text=_text;
@@ -61,6 +61,14 @@ public class DreamController : MonoBehaviour
             GameEventLinker.NewEvent("Dream"+(PlayerManager.day-1),true);
         }
             
+    }
+
+    private void setsound(int _day)
+    {
+        switch(_day)
+        {
+            
+        }
     }
 }
 

@@ -23,8 +23,8 @@ public class SleepController : MonoBehaviour
         textPanel=DialogueManager.instance.dialoguePanel;
         text.text= "";
         _color=new Color(0,0,0);
-        //GameEventLinker.NewEvent("doorlock_veranda",true);
-        //GameEventLinker.NewEvent("doorlock_workspace",true);
+        GameEventLinker.NewEvent("doorlock_veranda",true);
+        GameEventLinker.NewEvent("doorlock_workspace",true);
 
         if (type == Type.WakeUp && stageDay == PlayerManager.day)
         {
@@ -51,8 +51,12 @@ public class SleepController : MonoBehaviour
 
     IEnumerator starting()
     {
+        SFX.Play(SoundEffect.phone_call_ringing);
+        yield return new WaitForSeconds(3f);;
+        SFX.Play(SoundEffect.phone_call_take_on);
         Instantiate(Resources.Load<GameObject>("Dream/" + 0));
         yield return new WaitUntil(()=>GameEventLinker.IsAvailable("Dream"+0));
+        SFX.Play(SoundEffect.phone_call_take_off);
         PlayerManager.day ++;
         Debug.Log(PlayerManager.day);
         PlayerManager.instance.notMove=false;
