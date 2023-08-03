@@ -45,8 +45,9 @@ public enum SoundEffect
     car_approach,
     footstep,
     item,
-    doorlick_button,
+    doorlock_button,
     light_switch,
+    map_transfer,
 }
 
 public enum BackgroundMusic

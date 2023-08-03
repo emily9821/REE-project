@@ -91,6 +91,7 @@ public class TransferMap : MonoBehaviour
             if(!onlock ) //해금되면 입장
             {
                 Debug.Log("transfer");
+                SFX.Play(SoundEffect.map_transfer);
                 thePlayer.currentMapName = transferMapName;
                 SceneManager.LoadScene(transferMapName);
             }

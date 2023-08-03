@@ -34,6 +34,7 @@ public class RedlightEvent : MonoBehaviour
 
     public void onred()
     {
+        SFX.Play(SoundEffect.light_switch);
         Debug.Log("red");
         if(!isRed)
         {
