@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: shell
-  day: 1
+  day: 3
   description:
   - "\uC30D\uB465\uC774 \uC790\uB9AC\uC5D0 \uAD00\uD55C \uC2E0\uD654\uAC00 \uC801\uD78C
     \uCC45."
@@ -726,7 +726,7 @@ MonoBehaviour:
   day: 3
   description:
   - "\uAC00\uC871\uC0AC\uC9C4"
-  img: {fileID: 0}
+  img: {fileID: 21300000, guid: c10e7cbe9d215094cb1eeece9b65bf90, type: 3}
   itemname: room2_family
 --- !u!1 &814495224
 GameObject:
@@ -852,9 +852,9 @@ MonoBehaviour:
   arrscenelock:
   - _day: 3
     description:
-    - "\uBE44\uBC00\uBC88\uD638\uAC00 \uAC78\uB824\uC788\uC2B5\uB2C8\uB2E4."
+    - "\uBE44\uBC00\uBC88\uD638\uB97C \uC785\uB825\uD558\uC2DC\uC624."
   flag: 0
-  sclock: 0
+  onlock: 0
   text: {fileID: 0}
   textPanel: {fileID: 0}
 --- !u!4 &869859803
@@ -1111,7 +1111,7 @@ MonoBehaviour:
   transferMapName: room1
   arrscenelock: []
   flag: 0
-  sclock: 0
+  onlock: 0
   text: {fileID: 0}
   textPanel: {fileID: 0}
 --- !u!4 &1273693399
@@ -1639,7 +1639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: carpet
-  day: 1
+  day: 3
   description:
   - "\uBC1C \uBC11\uC5D0 \uBB34\uC5B8\uAC00 \uC774\uC9C8\uAC10\uC774 \uB290\uAEF4\uC9C4\uB2E4 "
   img: {fileID: 0}

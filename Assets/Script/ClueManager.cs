@@ -29,7 +29,6 @@ public class ClueManager : MonoBehaviour
 
     public GameObject obj;
     private string imgname;
-    private SceneItemManager sceneitemmanager;
 
     public bool isclue=false;
     Sprite imgObject;
@@ -43,7 +42,6 @@ public class ClueManager : MonoBehaviour
     void Start()
     {
         //Instantiate(Resources.Load<GameObject>("Item_Prefab"));
-        sceneitemmanager=FindObjectOfType<SceneItemManager>();
         text=DialogueManager.instance.text;
         textPanel=DialogueManager.instance.dialoguePanel;
         text.text= "";

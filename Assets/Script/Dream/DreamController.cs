@@ -8,14 +8,15 @@ public class DreamController : MonoBehaviour
     public static DreamController instance; //생성
 
     public Dream[] dreams; //day
-    //private SleepController sleepController;
     public SpriteRenderer renderer;
     public TextMeshProUGUI text;
     public GameObject textPanel;
+    //private SleepController _sleepController;
 
     // Start is called before the first frame update
     void Start()
     {
+        //_sleepController = FindObjectOfType<SleepController>();
         Debug.Log("daydream");
         text=DialogueManager.instance.text;
         textPanel=DialogueManager.instance.dialoguePanel;
@@ -30,12 +31,14 @@ public class DreamController : MonoBehaviour
 
     IEnumerator ShowDream()
     {
+        FadeManager.StartFadeIn();
         textPanel.SetActive(true);
         foreach (var dream in dreams)
         {
             renderer.sprite=dream.img;
             renderer.gameObject.transform.localScale= new Vector3(150,150,1);
             renderer.gameObject.transform.position=PlayerManager.instance.transform.position;
+            yield return new WaitForSeconds(0.1f);
             foreach (var _text in dream.detailDescription)
             {
                 text.text=_text;
@@ -44,16 +47,26 @@ public class DreamController : MonoBehaviour
             }
         }
         text.text="";
+        yield return new WaitForSeconds(1f);
         textPanel.SetActive(false);
-        Debug.Log("Dream"+(PlayerManager.day-1));
-        GameEventLinker.NewEvent("Dream"+(PlayerManager.day-1),true);
+        
+        if(PlayerManager.day == 0 ||(PlayerManager.day ==5 && !SleepController.isSleeping ))
+        {
+            Debug.Log("Dream"+(PlayerManager.day));
+            GameEventLinker.NewEvent("Dream"+(PlayerManager.day),true);
+        }
+        else
+        {
+            Debug.Log("Dream"+(PlayerManager.day-1));
+            GameEventLinker.NewEvent("Dream"+(PlayerManager.day-1),true);
+        }
+            
     }
 }
 
 [System.Serializable]
 public class Dream
 {
-    public int dreamday;
     public string dreamName;
     public string[] detailDescription;
     public float waitTime;

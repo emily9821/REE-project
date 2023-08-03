@@ -24,9 +24,9 @@ public class FadeManager : MonoBehaviour
     private readonly WaitForSeconds waitTime = new WaitForSeconds(0.01f);
     private static FadeManager _fadeManager;
 
-    public static void StartFadeOut()
+    public static void StartFadeOut(Color _color)
     {
-        I.FadeOut();
+        I.FadeOut(_color);
     }
 
     public static void StartFadeIn()
@@ -34,14 +34,15 @@ public class FadeManager : MonoBehaviour
         I.FadeIn();
     }
 
-    public void FadeOut(float _speed =0.02f)
+    public void FadeOut(Color _color,float _speed =0.02f)
     {
         StopAllCoroutines();
-        StartCoroutine(FadeOutCoroutine(_speed));
+        StartCoroutine(FadeOutCoroutine(_color,_speed));
 
     }
-    IEnumerator FadeOutCoroutine(float _speed)
+    IEnumerator FadeOutCoroutine(Color _color,float _speed)
     {
+        color=_color;
         color.a = 0f; //투명도 0
         //color = screen.color;
 
@@ -110,17 +111,4 @@ public class FadeManager : MonoBehaviour
         }
     }
 
-    public void redIn()
-    {
-        color = screen.color;
-        color.a= 0.3f;
-        // StopAllCoroutines();
-        // StartCoroutine(redInCoroutine(_speed));
-    }
-
-    // IEnumerator redInCoroutine(float _speed)
-    // {
-    //     color = screen.color;
-    //     color.a= 0.3f;
-    // }
 }

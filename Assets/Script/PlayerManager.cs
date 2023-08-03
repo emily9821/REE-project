@@ -28,7 +28,7 @@ public class PlayerManager : MovingCharacter
     // private float currentImgeventDelay;
 
     public GameObject playobject;
-    public static int day=1; //현재 day
+    public static int day=0; //현재 day
     public int enditemcount=0; //4일차 lab 미니게임 아이템 수집 개수
     private int[] enditem=new int[4]{0,0,0,0};
     public string ending="sad";
@@ -86,7 +86,7 @@ public class PlayerManager : MovingCharacter
             if(vector.x !=0)
                 vector.y=0;
 
-            Debug.Log(vector.x);
+            //Debug.Log(vector.x);
             SetDir(vector);
 
             //Animation
@@ -105,6 +105,7 @@ public class PlayerManager : MovingCharacter
             if(hit.collider != null )
             {
                 playobject = hit.collider.gameObject;
+                Debug.Log(playobject);
                 break;
             }  
             else
@@ -176,25 +177,42 @@ public class PlayerManager : MovingCharacter
                 realimg = theClue.showimage(day, objDetection.collider.gameObject);
             }
 
+             //lab 미니게임 아이템 획득
             if(currentMapName == "lab" && objDetection.collider != null)
             {
                 switch(objDetection.collider.gameObject.name)
                 {
                     case "lab_log":
                         if(enditem[0]==0)
+                        {
+                            enditem[0]=1;
                             enditemcount++;
+                            
+                        } Debug.Log("lab_log");
                         break;
                     case "lab_report1":
                         if(enditem[1]==0)
+                        {
+                            enditem[1]=1;
                             enditemcount++;
+                            
+                        }Debug.Log("lab_report1");
                         break;
                     case "computer":
                         if(enditem[2]==0)
+                        {
+                            enditem[2]=1;
                             enditemcount++;
+                           
+                        } Debug.Log("computer");
                         break;
                     case "lab_report2":
                         if(enditem[3]==0)
+                        {
+                            enditem[3]=1;
                             enditemcount++;
+                            
+                        }Debug.Log("lab_report2");
                         break;
                     default:
                         break;
@@ -227,12 +245,6 @@ public class PlayerManager : MovingCharacter
                 Debug.Log("start minigame");
                 StartCoroutine(minigame());
             }
-        }
-
-        //lab 미니게임 아이템 획득
-        if(currentMapName == "lab")
-        {
-            
         }
     }
 

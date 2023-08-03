@@ -56,7 +56,7 @@ public class TransferMap : MonoBehaviour
                         onlock=true;
                         if(transferMapName == "veranda" && scene._day ==2)
                         {
-                            if(!GameEventLinker.IsAvailable("doorlock_workspace"))
+                            if(!GameEventLinker.IsAvailable("doorlock_veranda"))
                             {
                                 showtext(scene.description);
                                 GameEventLinker.NewEvent("doorlock_veranda",true);
@@ -64,7 +64,7 @@ public class TransferMap : MonoBehaviour
                             }
                             onlock=false;
                         }
-                        if(transferMapName == "workspace" && scene._day ==1)
+                        if(transferMapName == "workspace" && scene._day ==2)
                         {
                             if(!GameEventLinker.IsAvailable("doorlock_workspace"))
                             {
@@ -76,6 +76,10 @@ public class TransferMap : MonoBehaviour
                         }
                         else
                         {
+                            if(transferMapName == "veranda")
+                                GameEventLinker.NewEvent("doorlock_veranda",false);
+                            if(transferMapName == "workspace")
+                                GameEventLinker.NewEvent("doorlock_workspace",false);
                             showtext(scene.description);
                             onlock=true;
                         }

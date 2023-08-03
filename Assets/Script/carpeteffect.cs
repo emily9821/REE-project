@@ -10,9 +10,9 @@ public class carpeteffect : MonoBehaviour
         if(collision.gameObject.name == "Player"  && Input.GetKeyDown(KeyCode.Z))
         {
             Debug.Log("z");
-            if(PlayerManager.day ==1)
+            if(PlayerManager.day ==3)
             {
-                ClueManager.instance.showText(1,gameObject);
+                ClueManager.instance.showText(3,gameObject);
                 
                 if(!GameEventLinker.IsAvailable("doorlock_lab"))
                 {
