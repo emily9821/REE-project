@@ -164,3 +164,13 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 32619994ec666cb4e9ed1da15a730d55, type: 3}
   - sound: 10
     clip: {fileID: 8300000, guid: e3437769bfb7738498e14bdebbef7a8c, type: 3}
+  - sound: 11
+    clip: {fileID: 8300000, guid: 869da79c806ec354c95860a6731d2921, type: 3}
+  - sound: 12
+    clip: {fileID: 8300000, guid: 08ea64ae6e534924cbb27c945ec67870, type: 3}
+  - sound: 13
+    clip: {fileID: 8300000, guid: ee90fac80184c2f43bc82957d5edf735, type: 3}
+  - sound: 14
+    clip: {fileID: 8300000, guid: d18bde84298032b4da70a2515dac9e9e, type: 3}
+  - sound: 15
+    clip: {fileID: 8300000, guid: f14d8fab0c1d67d4c91d243bc813188c, type: 3}
