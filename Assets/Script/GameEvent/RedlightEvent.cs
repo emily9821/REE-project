@@ -27,7 +27,7 @@ public class RedlightEvent : MonoBehaviour
         if (redLightEvent == null)
             redLightEvent = EventOptionHandler.Call("redlight");
         redLightEvent.gameObject.SetActive(true);
-        redLightEvent.AddEvent(() => redLightEvent.gameObject.SetActive(false));
+        redLightEvent.AddEventToAll(() => redLightEvent.gameObject.SetActive(false));
         yield return null;
         
     }
