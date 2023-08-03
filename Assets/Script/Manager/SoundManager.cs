@@ -51,6 +51,8 @@ public enum SoundEffect
     dream2_ear_ringing,
     dream5_footstep,
     dream6_crowd_noise,
+    outdoor_machine,
+    drinking_water,
 }
 
 public enum BackgroundMusic
