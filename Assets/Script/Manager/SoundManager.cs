@@ -48,6 +48,9 @@ public enum SoundEffect
     doorlock_button,
     light_switch,
     map_transfer,
+    dream2_ear_ringing,
+    dream5_footstep,
+    dream6_crowd_noise,
 }
 
 public enum BackgroundMusic
