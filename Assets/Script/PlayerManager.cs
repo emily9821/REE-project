@@ -28,7 +28,7 @@ public class PlayerManager : MovingCharacter
     // private float currentImgeventDelay;
 
     public GameObject playobject;
-    public static int day=3; //현재 day
+    public static int day=0; //현재 day
     public int enditemcount=0; //4일차 lab 미니게임 아이템 수집 개수
     private int[] enditem=new int[4]{0,0,0,0};
     public string ending="sad";
@@ -237,25 +237,9 @@ public class PlayerManager : MovingCharacter
             realimg = 0;
         }
 
-        //workspace 미니게임 실행
-        if(currentMapName == "workspace" && day ==3 && !isminigaming )
-        {
-            isminigaming=true;
-            if(!GameEventLinker.IsAvailable("workspace_minigame"))
-            {
-                Debug.Log("start minigame");
-                Resources.Load<GameObject>("LabMinigame");
-                StartCoroutine(minigame());
-            }
-        }
     }
 
-IEnumerator minigame()
-{
-    Instantiate(Resources.Load<GameObject>("LabMinigame"));
-    yield return new WaitUntil(()=>GameEventLinker.IsAvailable("lab_minigame"));
-    isminigaming=false;
-}
+
     private void SetDir(Vector3 dir)
     {
         if (dir.magnitude <= 0.1f)

@@ -36,6 +36,7 @@ public class TransferMap : MonoBehaviour
         //     textPanel.SetActive(false);
         text=DialogueManager.instance.text;
         text.text="";
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

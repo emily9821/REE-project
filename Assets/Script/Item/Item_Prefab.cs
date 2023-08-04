@@ -22,16 +22,8 @@ public class Item_Prefab : MonoBehaviour
     
         foreach (var item in management.items)
         {
-            
-            ItemAdd(item.name, item.day);
+            ITEM[item.day-1].Add(item.name,item);
         }
 
-    }
-
-    public void ItemAdd(string name, int day)
-    {
-        ImgEventItem target = management.items.Find(x => x.name == name); //id에 맞는 리스트 정보 찾기
-        ITEM[day-1].Add(name,target); //day에 맞는 name 키값 과 정보리스트 value 추가
-        Debug.Log(name+target+ day);
     }
 }

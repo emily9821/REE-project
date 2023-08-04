@@ -55,8 +55,6 @@ public class ClueManager : MonoBehaviour
         //Debug.Log("Day" + _day);
         //Debug.Log("scanobj" + scanObj);
         //이미지 로드
-        foreach(var it in Item_Prefab.ITEM[_day-1])
-        //    Debug.Log(it.Value.itemname);
         
         //Debug.Log(_day-1);
        // Debug.Log(Item_Prefab.ITEM[_day-1][scanObj.name].itemname);

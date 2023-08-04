@@ -17,7 +17,7 @@ public class Progress
     {
             new string[2] { "doorlock_workspace_false", "doorlock_veranda_false"},
             new string[5] { "doorlock_workspace", "veranda_outview", "room1_memo", "room1_newspaper", "workspace_noneselfie" },
-            new string[9] { "doorlock_lab","workspace_minigame" , "room1_pill", "room1_family", "room1_carpet", "room2_family", "room2_myth", "room2_carpet", "worspace_selfie" },
+            new string[7] { "doorlock_lab","workspace_minigame" , "room1_pill", "room1_family", "room2_family", "room2_myth", "workspace_selfie" },
             new string[1] {"lab_minigame"},
             new string[0] {},
     };

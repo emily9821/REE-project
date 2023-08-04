@@ -1919,7 +1919,7 @@ MonoBehaviour:
   description:
   - "\uBB3C\uCEF5\uACFC \uC54C\uC57D\uC774 \uB193\uC5EC\uC788\uC74C"
   img: {fileID: 0}
-  itemname: ' room1_pill'
+  itemname: room1_pill
 --- !u!1 &1045651479
 GameObject:
   m_ObjectHideFlags: 0
