@@ -57,7 +57,7 @@ public class DialogueManager : MonoBehaviour
         for(int i = 0; i< dialogue.sentences.Length; i++)
         {
             listSentences.Add(dialogue.sentences[i]);
-            Debug.Log(listSentences[i]);
+            //Debug.Log(listSentences[i]);
         }
         dialoguePanel.SetActive(talking);
         StartCoroutine(StartDialogueCoroutine());

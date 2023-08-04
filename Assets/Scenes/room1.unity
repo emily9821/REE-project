@@ -2170,21 +2170,6 @@ MonoBehaviour:
   stageDay: 2
   sleepTime: 2
   type: 1
---- !u!114 &1222981147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1222981141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8622ed1cae36cb541b8fdbabf46164db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stageDay: 0
-  sleepTime: 2
-  type: 1
 --- !u!1 &1252467599
 GameObject:
   m_ObjectHideFlags: 0
@@ -3057,9 +3042,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1283146804125406637, guid: aaffb1f10d67e5e4d9687df9baeaf596, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1222981145}
-    - targetCorrespondingSourceObject: {fileID: 1283146804125406637, guid: aaffb1f10d67e5e4d9687df9baeaf596, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1222981147}
   m_SourcePrefab: {fileID: 100100000, guid: aaffb1f10d67e5e4d9687df9baeaf596, type: 3}
 --- !u!1 &1601860609
 GameObject:
@@ -3407,8 +3389,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 1711343918}
   - {fileID: 1045443117}
+  - {fileID: 1045443118}
+  - {fileID: 1711343918}
+  - {fileID: 1711343919}
 --- !u!4 &1834642465
 Transform:
   m_ObjectHideFlags: 0

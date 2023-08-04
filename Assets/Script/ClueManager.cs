@@ -52,9 +52,14 @@ public class ClueManager : MonoBehaviour
 
     public int showimage(int _day,GameObject scanObj)
     {
-        Debug.Log("Day" + _day);
-        Debug.Log("scanobj" + scanObj);
+        //Debug.Log("Day" + _day);
+        //Debug.Log("scanobj" + scanObj);
         //이미지 로드
+        foreach(var it in Item_Prefab.ITEM[_day-1])
+        //    Debug.Log(it.Value.itemname);
+        
+        //Debug.Log(_day-1);
+       // Debug.Log(Item_Prefab.ITEM[_day-1][scanObj.name].itemname);
         renderer.sprite=Item_Prefab.ITEM[_day-1][scanObj.name].img;
 
         if (renderer.sprite == null && Item_Prefab.ITEM[_day-1][scanObj.name].description == null)
@@ -67,11 +72,12 @@ public class ClueManager : MonoBehaviour
             renderer.gameObject.SetActive(true);
             renderer.gameObject.transform.localScale= new Vector3(150,150,1);
             renderer.gameObject.transform.position=PlayerManager.instance.transform.position;
-            Debug.Log(scanObj.name);
+            //Debug.Log(Item_Prefab.ITEM[_day-1][scanObj.name].itemname);
         }
     
         showText(_day, scanObj);
         GameEventLinker.NewEvent(Item_Prefab.ITEM[_day-1][scanObj.name].itemname,true);
+        //Debug.Log(Item_Prefab.ITEM[_day-1][scanObj.name].itemname + GameEventLinker.IsAvailable(Item_Prefab.ITEM[_day-1][scanObj.name].itemname));
         isclue = false;
         return 100;
 
@@ -84,7 +90,7 @@ public class ClueManager : MonoBehaviour
         foreach (var item in Item_Prefab.ITEM[_day-1][scanObj.name].description)
         {
             listSentences.Add(item);
-            Debug.Log(listSentences);
+            //Debug.Log(listSentences);
         }
 
         StartCoroutine(starttextCoroutine());

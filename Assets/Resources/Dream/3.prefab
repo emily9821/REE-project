@@ -136,12 +136,14 @@ MonoBehaviour:
       \uC7E4\uB791 \uB180\uC9C0 \uB9D0\uC790..! "
     waitTime: 2
     img: {fileID: 21300000, guid: 7bf4f6703ca869a448c6bf91a5c1f648, type: 3}
+    soundef: 13
   - dreamName: dream3_2(7)
     detailDescription:
     - "\uCE74\uB97C: \uAD1C\uCC2E\uC544 \uD30C\uBCA8\u2026 \uAD1C\uCC2E\uC744 \uAC70\uC57C..
       \uBB34\uC2A8 \uC77C\uC774 \uC788\uC5B4\uB3C4 \uD615\uC774 \uC9C0\uCF1C\uC904\uAC70\uC57C"
     waitTime: 1
     img: {fileID: 21300000, guid: 22649d63f25cf2d409e36daf4d02e1f9, type: 3}
+    soundef: 16
   renderer: {fileID: 5973347422875981997}
   text: {fileID: 0}
   textPanel: {fileID: 0}

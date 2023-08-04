@@ -34,7 +34,7 @@ public struct SoundClip<TEnum> where TEnum : Enum
     public TEnum sound;
     public AudioClip clip;
 }
-
+[System.Serializable]
 public enum SoundEffect
 {
     doorlock_open,
@@ -53,6 +53,7 @@ public enum SoundEffect
     dream6_crowd_noise,
     outdoor_machine,
     drinking_water,
+    none
 }
 
 public enum BackgroundMusic

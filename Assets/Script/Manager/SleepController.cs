@@ -23,8 +23,6 @@ public class SleepController : MonoBehaviour
         textPanel=DialogueManager.instance.dialoguePanel;
         text.text= "";
         _color=new Color(0,0,0);
-        GameEventLinker.NewEvent("doorlock_veranda",true);
-        GameEventLinker.NewEvent("doorlock_workspace",true);
 
         if (type == Type.WakeUp && stageDay == PlayerManager.day)
         {
@@ -127,9 +125,10 @@ public class SleepController : MonoBehaviour
     {
         if(PlayerManager.day ==3 && stageDay==3)
         {
-            StartCoroutine(day3ending());
+            
             if (Progress.Sleep())
             {
+                StartCoroutine(day3ending());
                 Debug.Log("sleep");
                 StartCoroutine(Sleeping());
             }

@@ -52,17 +52,20 @@ MonoBehaviour:
       \uB290\uB08C\uC774 \uB4E0\uB2E4.. "
     waitTime: 3
     img: {fileID: 21300000, guid: e61318ede31d4fc499f6cac07eb94732, type: 3}
+    soundef: 11
   - dreamName: dream2-2(5)
     detailDescription:
     - ".. \uB3C4\uC640\uC8FC\uC138\uC694\u2026\uB3C4\uC640\u2026 "
     waitTime: 3
     img: {fileID: 21300000, guid: 1562cc75540072a4ebd6057a28c4a8fb, type: 3}
+    soundef: 16
   - dreamName: dream2-3(7)
     detailDescription:
     - "\uB05D\uC5C6\uB294 \uC5B4\uB460 \uC18D\u2026. \uC5B4\uB51C\uAC00\uACE0 \uC788\uC5C8\uC9C0..?
       \u2026"
     waitTime: 1
     img: {fileID: 21300000, guid: 854752c7926cecd48b33b03a0767fa1d, type: 3}
+    soundef: 12
   renderer: {fileID: 7127653658792414402}
   text: {fileID: 0}
   textPanel: {fileID: 0}

@@ -54,19 +54,25 @@ public class TransferMap : MonoBehaviour
                     if(PlayerManager.day == scene._day) // 해금 조건이 day와 일치할 경우
                     {
                         onlock=true;
-                        if(transferMapName == "veranda" && scene._day ==2)
+                        if(transferMapName == "veranda" )
                         {
-                            if(!GameEventLinker.IsAvailable("doorlock_veranda"))
+                            if(scene._day ==1)
                             {
                                 showtext(scene.description);
-                                GameEventLinker.NewEvent("doorlock_veranda",true);
+                                GameEventLinker.NewEvent("doorlock_veranda_false",true);
                                 break;
                             }
                             onlock=false;
                         }
-                        if(transferMapName == "workspace" && scene._day ==2)
+                        if(transferMapName == "workspace")
                         {
-                            if(!GameEventLinker.IsAvailable("doorlock_workspace"))
+                            if(scene._day ==1)
+                            {
+                                showtext(scene.description);
+                                GameEventLinker.NewEvent("doorlock_workspace_false",true);
+                                break;
+                            }
+                            if(scene._day ==2 && !GameEventLinker.IsAvailable("doorlock_workspace"))
                             {
                                 showtext(scene.description);
                                 StartCoroutine(_doorLockcoroutine());
@@ -76,12 +82,8 @@ public class TransferMap : MonoBehaviour
                         }
                         else
                         {
-                            if(transferMapName == "veranda")
-                                GameEventLinker.NewEvent("doorlock_veranda",false);
-                            if(transferMapName == "workspace")
-                                GameEventLinker.NewEvent("doorlock_workspace",false);
                             showtext(scene.description);
-                            onlock=true;
+                            onlock=false;
                         }
                         break;
                     }       

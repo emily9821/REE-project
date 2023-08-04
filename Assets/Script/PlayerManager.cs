@@ -28,7 +28,7 @@ public class PlayerManager : MovingCharacter
     // private float currentImgeventDelay;
 
     public GameObject playobject;
-    public static int day=0; //현재 day
+    public static int day=3; //현재 day
     public int enditemcount=0; //4일차 lab 미니게임 아이템 수집 개수
     private int[] enditem=new int[4]{0,0,0,0};
     public string ending="sad";
@@ -44,9 +44,10 @@ public class PlayerManager : MovingCharacter
 
     private void Awake()
     {
-        GameEventLinker.LinkerClear();
-        if(instance == null)
+        
+        if(instance == null)       
         {
+            GameEventLinker.LinkerClear();
             DontDestroyOnLoad(this.gameObject); //맵이 이동해도 캐릭터 유지
             instance=this;
         }
@@ -105,7 +106,7 @@ public class PlayerManager : MovingCharacter
             if(hit.collider != null )
             {
                 playobject = hit.collider.gameObject;
-                Debug.Log(playobject);
+                //Debug.Log(playobject);
                 break;
             }  
             else
@@ -150,7 +151,7 @@ public class PlayerManager : MovingCharacter
     // Update is called once per frame
     void Update() //매 프레임마다 함수를 실행
     {     //위치 입력 받기 , 레이캐스트
-        var objDetection = Physics2D.Linecast(transform.position, transform.position + normalizedDir * 50f, layerMask);
+        var objDetection = Physics2D.Linecast(transform.position, transform.position + normalizedDir * 70f, layerMask);
         Debug.DrawLine(transform.position, transform.position + normalizedDir * 100, Color.blue);
         //Debug.Log(normalizedDir);
         if (canMove && !notMove && !imgevent) //코루틴 반복 조건
@@ -171,7 +172,7 @@ public class PlayerManager : MovingCharacter
             if (objDetection.collider != null && Input.GetKeyDown(KeyCode.Z))
             {
                 //playobject = hit.collider.gameObject;
-                Debug.Log(playobject);
+                //Debug.Log(playobject);
                 Debug.Log("z");
                 imgevent = true;
                 realimg = theClue.showimage(day, objDetection.collider.gameObject);
@@ -237,12 +238,13 @@ public class PlayerManager : MovingCharacter
         }
 
         //workspace 미니게임 실행
-        if(currentMapName == "workspace" && day ==1 && !isminigaming )
+        if(currentMapName == "workspace" && day ==3 && !isminigaming )
         {
             isminigaming=true;
             if(!GameEventLinker.IsAvailable("workspace_minigame"))
             {
                 Debug.Log("start minigame");
+                Resources.Load<GameObject>("LabMinigame");
                 StartCoroutine(minigame());
             }
         }

@@ -15,8 +15,8 @@ public class Progress
     public static string[] startScene = new string[5] { "room1", "room1", "room1", "lab", "veranda" };
     public static string[][] stageEvents = new string[5][]
     {
-            new string[2] { "doorlock_workspace", "doorlock_veranda"},
-            new string[5] { "doorlock_workspace", "doorlock_veranda", "room1_memo", "room1_newspaper", "workspace_noneselfie" },
+            new string[2] { "doorlock_workspace_false", "doorlock_veranda_false"},
+            new string[5] { "doorlock_workspace", "veranda_outview", "room1_memo", "room1_newspaper", "workspace_noneselfie" },
             new string[9] { "doorlock_lab","workspace_minigame" , "room1_pill", "room1_family", "room1_carpet", "room2_family", "room2_myth", "room2_carpet", "worspace_selfie" },
             new string[1] {"lab_minigame"},
             new string[0] {},
@@ -44,9 +44,7 @@ public class Progress
 
     public static void WakeUp()
     {
-        Debug.Log(PlayerManager.day);
         Load(); //error! PlayerManager.day=2로 됨..
-        Debug.Log(PlayerManager.day);
         Debug.Log("day: " + PlayerManager.day);
         FadeManager.StartFadeIn();
         SceneManager.LoadScene(startScene[PlayerManager.day - 1], LoadSceneMode.Single);
@@ -56,6 +54,8 @@ public class Progress
 
     public static bool CheckDayEvents(int day)
     {
+        Debug.Log("doorlock_workspace"+GameEventLinker.IsAvailable("doorlock_workspace"));
+        Debug.Log(GameEventLinker.linkedEvent.Count);
         return IsClearAllStageEvent(stageEvents[day]);
     }
 
@@ -63,25 +63,12 @@ public class Progress
     {
         for (int i = 0; i < e.Length; i++)
         {
-            if(PlayerManager.day==1)
+            if (!GameEventLinker.IsAvailable(e[i]))
             {
-                if (GameEventLinker.IsAvailable(e[i]))
-                {
-                    Debug.Log("단서가 부족합니다.");
-                    return false;
-                }
-                    
+                Debug.Log(e[i]);
+                //Debug.Log("단서가 부족합니다.");
+                return false;
             }
-            else
-            {
-                if (!GameEventLinker.IsAvailable(e[i]))
-                {
-                    Debug.Log("단서가 부족합니다.");
-                    return false;
-                }
-                    
-            }
-            
         }
         return true;
     }
