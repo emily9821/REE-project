@@ -28,7 +28,7 @@ public class PlayerManager : MovingCharacter
     // private float currentImgeventDelay;
 
     public GameObject playobject;
-    public static int day=1; //현재 day
+    public static int day=0; //현재 day
     public int enditemcount=0; //4일차 lab 미니게임 아이템 수집 개수
     private int[] enditem=new int[4]{0,0,0,0};
     public string ending="sad";
@@ -44,9 +44,10 @@ public class PlayerManager : MovingCharacter
 
     private void Awake()
     {
-        GameEventLinker.LinkerClear();
-        if(instance == null)
+        
+        if(instance == null)       
         {
+            GameEventLinker.LinkerClear();
             DontDestroyOnLoad(this.gameObject); //맵이 이동해도 캐릭터 유지
             instance=this;
         }
@@ -86,7 +87,7 @@ public class PlayerManager : MovingCharacter
             if(vector.x !=0)
                 vector.y=0;
 
-            Debug.Log(vector.x);
+            //Debug.Log(vector.x);
             SetDir(vector);
 
             //Animation
@@ -105,6 +106,7 @@ public class PlayerManager : MovingCharacter
             if(hit.collider != null )
             {
                 playobject = hit.collider.gameObject;
+                //Debug.Log(playobject);
                 break;
             }  
             else
@@ -149,7 +151,7 @@ public class PlayerManager : MovingCharacter
     // Update is called once per frame
     void Update() //매 프레임마다 함수를 실행
     {     //위치 입력 받기 , 레이캐스트
-        var objDetection = Physics2D.Linecast(transform.position, transform.position + normalizedDir * 50f, layerMask);
+        var objDetection = Physics2D.Linecast(transform.position, transform.position + normalizedDir * 70f, layerMask);
         Debug.DrawLine(transform.position, transform.position + normalizedDir * 100, Color.blue);
         //Debug.Log(normalizedDir);
         if (canMove && !notMove && !imgevent) //코루틴 반복 조건
@@ -170,31 +172,48 @@ public class PlayerManager : MovingCharacter
             if (objDetection.collider != null && Input.GetKeyDown(KeyCode.Z))
             {
                 //playobject = hit.collider.gameObject;
-                Debug.Log(playobject);
+                //Debug.Log(playobject);
                 Debug.Log("z");
                 imgevent = true;
                 realimg = theClue.showimage(day, objDetection.collider.gameObject);
             }
 
+             //lab 미니게임 아이템 획득
             if(currentMapName == "lab" && objDetection.collider != null)
             {
                 switch(objDetection.collider.gameObject.name)
                 {
                     case "lab_log":
                         if(enditem[0]==0)
+                        {
+                            enditem[0]=1;
                             enditemcount++;
+                            
+                        } Debug.Log("lab_log");
                         break;
                     case "lab_report1":
                         if(enditem[1]==0)
+                        {
+                            enditem[1]=1;
                             enditemcount++;
+                            
+                        }Debug.Log("lab_report1");
                         break;
                     case "computer":
                         if(enditem[2]==0)
+                        {
+                            enditem[2]=1;
                             enditemcount++;
+                           
+                        } Debug.Log("computer");
                         break;
                     case "lab_report2":
                         if(enditem[3]==0)
+                        {
+                            enditem[3]=1;
                             enditemcount++;
+                            
+                        }Debug.Log("lab_report2");
                         break;
                     default:
                         break;
@@ -218,30 +237,9 @@ public class PlayerManager : MovingCharacter
             realimg = 0;
         }
 
-        //workspace 미니게임 실행
-        if(currentMapName == "workspace" && day ==1 && !isminigaming )
-        {
-            isminigaming=true;
-            if(!GameEventLinker.IsAvailable("workspace_minigame"))
-            {
-                Debug.Log("start minigame");
-                StartCoroutine(minigame());
-            }
-        }
-
-        //lab 미니게임 아이템 획득
-        if(currentMapName == "lab")
-        {
-            
-        }
     }
 
-IEnumerator minigame()
-{
-    Instantiate(Resources.Load<GameObject>("LabMinigame"));
-    yield return new WaitUntil(()=>GameEventLinker.IsAvailable("lab_minigame"));
-    isminigaming=false;
-}
+
     private void SetDir(Vector3 dir)
     {
         if (dir.magnitude <= 0.1f)

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameEventLinker
 {
-    private static Dictionary<string, bool> linkedEvent = new Dictionary<string, bool>();
+    public static Dictionary<string, bool> linkedEvent = new Dictionary<string, bool>();
 
     public static bool IsAvailable(string targetEventName, Action targetEvent = null)
     {

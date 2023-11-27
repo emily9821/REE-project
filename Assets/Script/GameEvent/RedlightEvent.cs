@@ -27,13 +27,14 @@ public class RedlightEvent : MonoBehaviour
         if (redLightEvent == null)
             redLightEvent = EventOptionHandler.Call("redlight");
         redLightEvent.gameObject.SetActive(true);
-        redLightEvent.AddEvent(() => redLightEvent.gameObject.SetActive(false));
+        redLightEvent.AddEventToAll(() => redLightEvent.gameObject.SetActive(false));
         yield return null;
         
     }
 
     public void onred()
     {
+        SFX.Play(SoundEffect.light_switch);
         Debug.Log("red");
         if(!isRed)
         {

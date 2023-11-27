@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 8971211871568888112}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6127583769120425751
 MonoBehaviour:
@@ -46,8 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dreams:
-  - dreamday: 0
-    dreamName: start
+  - dreamName: start
     detailDescription:
     - "\uCE74\uB97C: \uC548\uB155 \uD30C\uBCA8! \uC5EC\uAE30 \uCE74\uB97C\uC774\uC57C! "
     - "\uD30C\uBCA8: \uCE74\uB97C \uC5B4\uB514\uC5D0 \uC788\uC5B4?"
@@ -67,10 +66,11 @@ MonoBehaviour:
       \uC2DD\uC0AC\uD558\uBA74\uC11C \uC598\uAE30\uD560 \uC218 \uC788\uC73C\uBA74
       \uC88B\uACA0\uC5B4"
     - "\uD30C\uBCA8: \uADF8\uB7F4\uAC8C!  \uB2E4\uC74C \uC8FC\uB9D0\uC5D0 \uBD10! "
-    waitTime: 18
-    img: {fileID: 0}
+    waitTime: 1.5
+    img: {fileID: 21300000, guid: a2bfef846d7cf384eac262976313abd1, type: 3}
   renderer: {fileID: 5149488480958178492}
   text: {fileID: 0}
+  textPanel: {fileID: 0}
 --- !u!1 &8268033932520811841
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +142,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -579853
-  m_SortingLayer: 7
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -13,11 +13,12 @@ public class TitleManager : MonoBehaviour
     void Start()
     {
         load.interactable = IsLoadable();    
+        Debug.Log(PlayerManager.day);
     }
 
     public void StartFirstScene()
     {
-        PlayerManager.day = 1;
+        PlayerManager.day = 0;
         SceneManager.LoadScene(firstScene);
     }
 

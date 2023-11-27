@@ -689,7 +689,7 @@ MonoBehaviour:
   transferMapName: room1
   arrscenelock: []
   flag: 0
-  sclock: 0
+  onlock: 0
   text: {fileID: 0}
   textPanel: {fileID: 0}
 --- !u!4 &632909296
@@ -1216,14 +1216,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transferMapName: workspace
   arrscenelock:
-  - _day: 0
+  - _day: 1
     description:
     - "\uC7A0\uACA8\uC788\uB2E4"
-  - _day: 1
+  - _day: 2
     description:
     - "\uBE44\uBC00\uBC88\uD638\uAC00 \uAC78\uB824\uC788\uB2E4."
   flag: 0
-  sclock: 0
+  onlock: 0
   text: {fileID: 0}
   textPanel: {fileID: 0}
 --- !u!4 &1093157301
@@ -1758,7 +1758,7 @@ MonoBehaviour:
     description:
     - "\uC9C0\uAE08\uC740 \uB098\uAC00\uACE0 \uC2F6\uC9C0 \uC54A\uC544..."
   flag: 0
-  sclock: 0
+  onlock: 0
   text: {fileID: 0}
   textPanel: {fileID: 0}
 --- !u!4 &1730658446
@@ -1854,7 +1854,7 @@ MonoBehaviour:
   transferMapName: livingroom
   arrscenelock: []
   flag: 0
-  sclock: 0
+  onlock: 0
   text: {fileID: 0}
   textPanel: {fileID: 0}
 --- !u!4 &1980141978

@@ -24,6 +24,7 @@ public class TalkDialogue : MonoBehaviour
     {
         if(collision.gameObject.name == "Player")
         {
+            SFX.Play(SoundEffect.item);
             theDM.ShowDialogue(dialogue);
         }
     }

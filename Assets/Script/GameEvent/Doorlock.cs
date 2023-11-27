@@ -24,7 +24,7 @@ public class Doorlock_lab : MonoBehaviour
         if (!isPwdEnabled)
             return;
 
-        SFX.Play(SoundEffect.doorlick_button);
+        SFX.Play(SoundEffect.doorlock_button);
         for (int j = 0; j < password.Length; j++)
         {
             if (password[j] == -1)
@@ -103,5 +103,6 @@ public class Doorlock_lab : MonoBehaviour
         yield return waitForClear;
         Clear();
         Debug.Log("wrong");
+        Destroy(gameObject);
     }
 }

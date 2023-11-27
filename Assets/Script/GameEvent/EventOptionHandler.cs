@@ -58,6 +58,14 @@ public class EventOptionHandler : MonoBehaviour
         }
     }
 
+    public void AddEventToAll(Action onRight)
+    {
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            buttons[i].onClick.AddListener(onRight.Invoke);
+        }
+    }
+
     public void Show() //선택지 보여줌
     {
         buttons = new List<Button>();

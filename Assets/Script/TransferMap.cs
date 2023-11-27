@@ -36,6 +36,7 @@ public class TransferMap : MonoBehaviour
         //     textPanel.SetActive(false);
         text=DialogueManager.instance.text;
         text.text="";
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,19 +55,25 @@ public class TransferMap : MonoBehaviour
                     if(PlayerManager.day == scene._day) // 해금 조건이 day와 일치할 경우
                     {
                         onlock=true;
-                        if(transferMapName == "veranda" && scene._day ==2)
+                        if(transferMapName == "veranda" )
                         {
-                            if(!GameEventLinker.IsAvailable("doorlock_workspace"))
+                            if(scene._day ==1)
                             {
                                 showtext(scene.description);
-                                GameEventLinker.NewEvent("doorlock_veranda",true);
+                                GameEventLinker.NewEvent("doorlock_veranda_false",true);
                                 break;
                             }
                             onlock=false;
                         }
-                        if(transferMapName == "workspace" && scene._day ==1)
+                        if(transferMapName == "workspace")
                         {
-                            if(!GameEventLinker.IsAvailable("doorlock_workspace"))
+                            if(scene._day ==1)
+                            {
+                                showtext(scene.description);
+                                GameEventLinker.NewEvent("doorlock_workspace_false",true);
+                                break;
+                            }
+                            if(scene._day ==2 && !GameEventLinker.IsAvailable("doorlock_workspace"))
                             {
                                 showtext(scene.description);
                                 StartCoroutine(_doorLockcoroutine());
@@ -77,7 +84,7 @@ public class TransferMap : MonoBehaviour
                         else
                         {
                             showtext(scene.description);
-                            onlock=true;
+                            onlock=false;
                         }
                         break;
                     }       
@@ -87,6 +94,7 @@ public class TransferMap : MonoBehaviour
             if(!onlock ) //해금되면 입장
             {
                 Debug.Log("transfer");
+                SFX.Play(SoundEffect.map_transfer);
                 thePlayer.currentMapName = transferMapName;
                 SceneManager.LoadScene(transferMapName);
             }
