@@ -3269,7 +3269,7 @@ MonoBehaviour:
   day: 3
   description:
   - "\uAC00\uC871\uC0AC\uC9C4"
-  img: {fileID: 21300000, guid: 7b646cc537b89da4ea3f24b1400b990c, type: 3}
+  img: {fileID: -1845724539, guid: 7b646cc537b89da4ea3f24b1400b990c, type: 3}
   itemname: room1_family
 --- !u!1001 &1753852815
 PrefabInstance:

@@ -332,7 +332,7 @@ MonoBehaviour:
   day: 3
   description:
   - " \uC778\uD654\uAC00 \uC644\uB8CC\uB41C\uB4EF\uD558\uB2E4"
-  img: {fileID: 0}
+  img: {fileID: 412366761, guid: d682edff85104a544932ea08ec403b5c, type: 3}
   itemname: workspace_selfie
 --- !u!1 &107529580
 GameObject:

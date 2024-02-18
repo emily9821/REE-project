@@ -65,8 +65,7 @@ public class Progress
         {
             if (!GameEventLinker.IsAvailable(e[i]))
             {
-                Debug.Log(e[i]);
-                //Debug.Log("단서가 부족합니다.");
+                Debug.Log("단서가 부족합니다:"+e[i]);
                 return false;
             }
         }
