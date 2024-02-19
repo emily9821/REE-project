@@ -56,7 +56,10 @@ public class DreamController : MonoBehaviour
         if(PlayerManager.day == 0 ||(PlayerManager.day ==5 && !SleepController.isSleeping ))
         {
             //Debug.Log("Dream"+(PlayerManager.day));
-            GameEventLinker.NewEvent("Dream"+(PlayerManager.day),true);
+            if(PlayerManager.day == 0 )
+                GameEventLinker.NewEvent("Dream"+(PlayerManager.day),true);
+            else
+                GameEventLinker.NewEvent("Dream"+(PlayerManager.instance.ending),true);
         }
         else
         {

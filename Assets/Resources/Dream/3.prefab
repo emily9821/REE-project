@@ -141,8 +141,14 @@ MonoBehaviour:
     detailDescription:
     - "\uCE74\uB97C: \uAD1C\uCC2E\uC544 \uD30C\uBCA8\u2026 \uAD1C\uCC2E\uC744 \uAC70\uC57C..
       \uBB34\uC2A8 \uC77C\uC774 \uC788\uC5B4\uB3C4 \uD615\uC774 \uC9C0\uCF1C\uC904\uAC70\uC57C"
-    waitTime: 1
+    waitTime: 2
     img: {fileID: 21300000, guid: 22649d63f25cf2d409e36daf4d02e1f9, type: 3}
+    soundef: 16
+  - dreamName: dream3_2(8)
+    detailDescription:
+    - Day4 Start
+    waitTime: 2
+    img: {fileID: -1177110571, guid: dbc4397c9dbfbc34e8332eb204913db0, type: 3}
     soundef: 16
   renderer: {fileID: 5973347422875981997}
   text: {fileID: 0}

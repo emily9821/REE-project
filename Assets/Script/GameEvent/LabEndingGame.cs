@@ -5,6 +5,7 @@ using TMPro;
 
 public class LabEndingGame : MonoBehaviour
 {
+    private bool ishappy=false;
     public SpriteRenderer renderer;
     public TextMeshProUGUI text;
     public GameObject textPanel;
@@ -18,13 +19,15 @@ public class LabEndingGame : MonoBehaviour
         textPanel=DialogueManager.instance.dialoguePanel;
         text.text= "";
     }
+    
     private void OnTriggerStay2D(Collider2D collision) 
     {
         if(collision.gameObject.name == "Player"  && Input.GetKeyDown(KeyCode.Space))
         {
             if(PlayerManager.instance.enditemcount != 4)
             {
-                Debug.Log("단서가 부족합니다.");
+                Debug.Log("단서가 부족합니다. 단서 개수:"+PlayerManager.instance.enditemcount);
+                //StartCoroutine(lackofHint());
             }
             else
             {
@@ -35,7 +38,7 @@ public class LabEndingGame : MonoBehaviour
                     // renderer.gameObject.transform.localScale= new Vector3(150,150,1);
                     // renderer.gameObject.transform.position=PlayerManager.instance.transform.position;
                     textPanel.SetActive(true);
-                    text.text="알맞은 물약을 고르시오";
+                    text.text="알맞은 답을 고르시오";
                     StartCoroutine(Endgame());
                 }
                 
@@ -53,9 +56,12 @@ public class LabEndingGame : MonoBehaviour
         //yield return new WaitUntil(() => endgameevent== null);
         Debug.Log("lab_minigame");
         GameEventLinker.NewEvent("lab_minigame",true);
+        
         PlayerManager.instance.notMove=false;
         text.text="";
         textPanel.SetActive(false);
+        
+         
         Debug.Log("sleep");
     }
 
@@ -63,5 +69,12 @@ public class LabEndingGame : MonoBehaviour
     {
         Debug.Log("happyending");
         PlayerManager.instance.ending="happy";
+        
+    }
+    public void sadendButton()
+    {
+        Debug.Log("sadending");
+        PlayerManager.instance.ending="sad";
+        
     }
 }

@@ -137,17 +137,26 @@ MonoBehaviour:
       \uC788\uB2E4.  "
     waitTime: 2
     img: {fileID: 21300000, guid: 9181693e5c56967438974eddeb0a9859, type: 3}
+    soundef: 16
   - dreamName: dream1-2(2)
     detailDescription:
     - "\uC9C0\uAE08 \uBB34\uC2A8\uC77C\uC774 \uC77C\uC5B4\uB098\uACE0 \uC788\uB294\uAC70\uC9C0?
       \uC6B0\uB9AC\uC9D1\uC774\u2026"
     waitTime: 2
     img: {fileID: 21300000, guid: 897351ac983eae549b35764a23f2856d, type: 3}
+    soundef: 16
   - dreamName: dream1-3(3)
     detailDescription:
     - "\uD30C\uBCA8.. \uBB34\uC2A8\uC77C\uC774 \uC788\uC5B4\uB3C4 \uC6B0\uB9B0 \uD568\uAED8\uC57C. "
     waitTime: 2
     img: {fileID: 21300000, guid: a2bfef846d7cf384eac262976313abd1, type: 3}
+    soundef: 16
+  - dreamName: dream1-3(4)
+    detailDescription:
+    - Day2  Start
+    waitTime: 2
+    img: {fileID: 1178098055, guid: 8342b595b3aa4d84e91218ab90e768e8, type: 3}
+    soundef: 16
   renderer: {fileID: 3416177651444958765}
   text: {fileID: 0}
   textPanel: {fileID: 0}

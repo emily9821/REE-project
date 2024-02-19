@@ -12,7 +12,7 @@ using UnityEngine.SceneManagement;
 
 public class Progress
 {
-    public static string[] startScene = new string[5] { "room1", "room1", "room1", "lab", "veranda" };
+    public static string[] startScene = new string[5] { "room1", "room1", "room1", "lab", "livingroom" };
     public static string[][] stageEvents = new string[5][]
     {
             new string[2] { "doorlock_workspace_false", "doorlock_veranda_false"},

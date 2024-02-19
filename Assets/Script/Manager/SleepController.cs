@@ -41,6 +41,7 @@ public class SleepController : MonoBehaviour
             //ending 5일차
             if (PlayerManager.day == 5)
             {
+                Debug.Log(PlayerManager.day);
                 PlayerManager.instance.notMove=true;
                 StartCoroutine(startending());
             }
@@ -69,7 +70,7 @@ public class SleepController : MonoBehaviour
         else if (PlayerManager.instance.ending == "sad")        
             Instantiate(Resources.Load<GameObject>("Dream/" + "sad"));
         
-        yield return new WaitUntil(()=>GameEventLinker.IsAvailable("Dream"+5));
+        yield return new WaitUntil(()=>GameEventLinker.IsAvailable("Dream"+PlayerManager.instance.ending));
         
         if (PlayerManager.instance.ending == "happy") 
             _color= new Color(1,1,1);     //white 
@@ -132,8 +133,9 @@ public class SleepController : MonoBehaviour
                 Debug.Log("sleep");
                 StartCoroutine(Sleeping());
             }
+
         }
-        if (Input.GetKeyDown(KeyCode.Space) && type == Type.Sleep && stageDay == PlayerManager.day) //collision.gameObject.name == "Player" && 
+        else if (Input.GetKeyDown(KeyCode.Space) && type == Type.Sleep && stageDay == PlayerManager.day) //collision.gameObject.name == "Player" && 
         {
             Debug.Log(type);
             Debug.Log(stageDay);

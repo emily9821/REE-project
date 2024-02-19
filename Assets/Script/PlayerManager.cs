@@ -28,7 +28,7 @@ public class PlayerManager : MovingCharacter
     // private float currentImgeventDelay;
 
     public GameObject playobject;
-    public static int day=0; //현재 day
+    public static int day=3; //현재 day
     public int enditemcount=0; //4일차 lab 미니게임 아이템 수집 개수
     private int[] enditem=new int[4]{0,0,0,0};
     public string ending="sad";
@@ -189,7 +189,7 @@ public class PlayerManager : MovingCharacter
                             enditem[0]=1;
                             enditemcount++;
                             
-                        } Debug.Log("lab_log");
+                        } Debug.Log("lab_log");Debug.Log(enditemcount);
                         break;
                     case "lab_report1":
                         if(enditem[1]==0)
@@ -197,7 +197,7 @@ public class PlayerManager : MovingCharacter
                             enditem[1]=1;
                             enditemcount++;
                             
-                        }Debug.Log("lab_report1");
+                        }Debug.Log("lab_report1");Debug.Log(enditemcount);
                         break;
                     case "computer":
                         if(enditem[2]==0)
@@ -205,7 +205,7 @@ public class PlayerManager : MovingCharacter
                             enditem[2]=1;
                             enditemcount++;
                            
-                        } Debug.Log("computer");
+                        } Debug.Log("computer");Debug.Log(enditemcount);
                         break;
                     case "lab_report2":
                         if(enditem[3]==0)
@@ -213,7 +213,7 @@ public class PlayerManager : MovingCharacter
                             enditem[3]=1;
                             enditemcount++;
                             
-                        }Debug.Log("lab_report2");
+                        }Debug.Log("lab_report2");Debug.Log(enditemcount);
                         break;
                     default:
                         break;

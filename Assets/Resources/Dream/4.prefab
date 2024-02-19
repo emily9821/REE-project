@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 3892273495294588821}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2447670409700866447
 MonoBehaviour:
@@ -45,9 +45,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4bfdb36fbd37049bd73bae30319226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dreams: []
+  dreams:
+  - dreamName: dream5
+    detailDescription:
+    - "\uD30C\uBCA8: \uCE74\uB97C.. \uC815\uB9D0 \uC624\uB79C\uB9CC\uC774\uC57C"
+    - "\uCE74\uB97C: \uD30C\uBCA8\u2026? \uC5B4\uC9F8\uC11C \uC5EC\uAE30\uC5D0..?"
+    - "\uD30C\uBCA8: \uCE74\uB97C \uAE30\uC5B5\uC548\uB098\uB294\uAC70\uC57C? \uADF8\uB3D9\uC548\uC758
+      \uC77C\uB4E4\uC774? "
+    - "\uCE74\uB97C: \uD30C\uBCA8 \uB3C4\uB300\uCCB4 \uBB34\uC2A8\uB9D0\uC744 \uD558\uB294\uAC70\uC57C.. "
+    - "\uD30C\uBCA8: \uADF8 \uC0AC\uAC74 \uC774\uD6C4\uB85C \uD615\uC774 \uC6B0\uB9AC
+      \uBAA8\uB450\uB97C \uC8FD\uC600\uC796\uC544 "
+    - "\uCE74\uB97C: \uC544\uB2C8\uC57C\u2026! \uADF8\uAC74 \uC0AC\uACE0\uC600\uC796\uC544..! "
+    - "\uD30C\uBCA8: \uC544\uC9C1\uB3C4 \uC815\uC2E0\uC744 \uBABB \uCC28\uB838\uAD6C\uB098 "
+    - "\uD30C\uBCA8: \uADF8\uB0A0 \uB0B4\uAC00 \uC8FD\uC740 \uB4A4\uB85C \uD615\uC740
+      \uC644\uC804 \uD328\uB2C9 \uC0C1\uD0DC\uC600\uC5B4 "
+    - "\uADF8\uB0A0 \uBD88\uC744 \uB0B8\uAC83\uB3C4, \uADF8\uACF3\uC560 \uC788\uB358
+      \uB098\uB97C \uB450\uACE0 \uB098\uC628\uAC83\uB3C4"
+    - "\uC6B0\uB9AC \uAC00\uC871\uC744 \uB9DD\uCE5C\uAC74  \uCE74\uB97C \uB108\uC57C. "
+    - "\uADF8\uB798\uC11C \uC9C0\uAE08\uAE4C\uC9C0 \uB3C4\uB9DD\uCCD0 \uC628\uAC70\uC796\uC544?
+      \uBE44\uAC81\uD558\uAC8C \uB098\uD55C\uD14C\uB85C."
+    waitTime: 2
+    img: {fileID: 21300000, guid: 4ed0c490ce4d5874db387a9cdb9520d8, type: 3}
+    soundef: 11
+  - dreamName: dream5
+    detailDescription:
+    - "\uCE74\uB97C \uC544\uC9C1\uB3C4 \uBAA8\uB974\uACA0\uC5B4? \uB09C \uB108\uB54C\uBB38\uC5D0
+      \uC8FD\uC5C8\uC5B4..!!"
+    waitTime: 1
+    img: {fileID: 21300000, guid: 4ed0c490ce4d5874db387a9cdb9520d8, type: 3}
+    soundef: 11
   renderer: {fileID: 1733246610323367658}
   text: {fileID: 0}
+  textPanel: {fileID: 0}
 --- !u!1 &7171147696868975919
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +148,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -579853
-  m_SortingLayer: 7
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
